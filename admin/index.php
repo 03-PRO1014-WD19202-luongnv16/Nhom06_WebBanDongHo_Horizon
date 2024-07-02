@@ -4,6 +4,7 @@
   include "../model/sanpham.php";
   include "../model/donhang.php";
   include '../model/pdo.php';
+  include "../model/voucher.php";
   include "header.php";
 
 
@@ -14,8 +15,8 @@
       case 'adddm':
         //Kiểm tra người dùng có click vào nút Add hay không
         if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
-          $tenloai=$_POST['tenloai'];
-          insert_danhmuc($tenloai);
+          $tendm=$_POST['tendm'];
+          insert_danhmuc($tendm);
           $thongbao="Thêm thành công";
         }
         include './danhmuc/add.php';
@@ -25,23 +26,23 @@
         include './danhmuc/list.php';
         break;
       case 'xoadm':
-        if(isset($_GET['id'])&&($_GET['id']>0)){
-          delete_danhmuc($_GET['id']);
+        if(isset($_GET['id_dm'])&&($_GET['id_dm']>0)){
+          delete_danhmuc($_GET['id_dm']);
         }
         $listdanhmuc=loadAll_danhmuc();
         include './danhmuc/list.php';
         break;
       case 'suadm':
-        if(isset($_GET['id'])&&($_GET['id']>0)){
-          $dm= loadOne_danhmuc($_GET['id']);
+        if(isset($_GET['id_dm'])&&($_GET['id_dm']>0)){
+          $dm= loadOne_danhmuc($_GET['id_dm']);
         }
         include "./danhmuc/update.php";
         break;
       case 'updatedm':
         if(isset($_POST['capnhat'])&&($_POST['capnhat'])){
-          $tenloai=$_POST['tenloai'];
-          $id=$_POST['id'];
-          update_danhmuc($id,$tenloai);
+          $tendm=$_POST['tendm'];
+          $id_dm=$_POST['id_dm'];
+          update_danhmuc($id,$tendm);
           $thongbao="Cập nhật thành công";
         }
         $listdanhmuc=loadAll_danhmuc();
@@ -134,7 +135,42 @@
           }
           $listdonhang=loadAll_donhang();
           include './donhang/list.php';
-          break;    
+          break;
+        case 'addvoucher':
+          if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
+            $ten_voucher=$_POST['ten_voucher'];
+            insert_danhmuc($ten_voucher);
+            $thongbao="Thêm thành công";
+          }
+          include './voucher/add.php';
+          break;  
+        case 'listvoucher':
+          $listvoucher=loadAll_voucher();
+          include './voucher/list.php';
+          break;
+        case 'xoavoucher':
+          if(isset($_GET['id'])&&($_GET['id']>0)){
+            delete_voucher($_GET['id']);
+          }
+          $listvoucher=loadAll_voucher();
+          include './voucher/list.php';
+          break;
+        case 'suavoucher':
+          if(isset($_GET['id'])&&($_GET['id']>0)){
+            $voucher= loadOne_voucher($_GET['id']);
+          }
+          include "./voucher/update.php";
+          break;
+        case 'updatevoucher':
+          if(isset($_POST['capnhat'])&&($_POST['capnhat'])){
+            $id=$_POST['id'];
+            $ten_voucher=$_POST['ten_voucher'];
+            update_voucher($id,$ten_voucher);
+            $thongbao="Cập nhật thành công";
+          }
+          $listvoucher=loadAll_voucher();
+          include './voucher/list.php';
+          break;     
         default:
           include 'home.php';
           break;
