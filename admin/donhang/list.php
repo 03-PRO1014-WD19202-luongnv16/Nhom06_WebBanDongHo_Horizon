@@ -9,19 +9,19 @@
     <div class="row mb10 frmdsloai">
     <table>
 
-        <tr>
-            <th></th>
-            <th>MÃ</th>
-            <th>MÃ SP</th>
-            <th>TÊN SP</th>
-            <th>ẢNH SP</th>
-            <th>TRẠNG THÁI</th>
-            <th>PTTT</th>
-            <th>GIÁ SP</th>
-            <th>SỐ LƯỢNG</th>
-            <th>THÀNH TIỀN</th>
+        <div>
+            <h3></h3>
+            <h3>MÃ</h3>
+            <h3>MÃ SP</h3>
+            <h3>TÊN SP</h3>
+            <h3>ẢNH SP</h3>
+            <h3>TRẠNG THÁI</h3>
+            <h3>PTTT</h3>
+            <h3>GIÁ SP</h3>
+            <h3>SỐ LƯỢNG</h3>
+            <h3>THÀNH TIỀN</h3>
            
-        </tr>
+        </div>
 
         <?php
         foreach($listdonhang as $list){
@@ -37,19 +37,19 @@
             // <br>'.$bill["bill_email"].'</br>'.$bill["bill_address"].' '.$bill["bill_tel"];
             // $ttdh=get_ttdh($bill['bill_status']);
             // $countsp=loadall_cart_coubt($bill['id']);
-            echo '<tr>
-            <td><input type="checkbox"></td>
-            <td>'.$id.'</td>
-            <td>'.$id_sp.'</td>
-            <td>'.$tensp.'</td>
-            <td>'.$anhsp.'</td>
-            <td>'.get_ttdh($trangthai).'</td>
-            <td>'.get_pttt($pttt).'</td>
-            <td>'.$gia.'</td>
-            <td>'.$soluong.'</td>
-            <td>'.$gia * $soluong.'</td>
-            <td><a href="'.$suabill.'"><input type="button" value="Sửa"></a>
-            </tr>';
+            echo '<div>
+            <input type="checkbox">
+            <div>'.$id.'</div>
+            <div>'.$id_sp.'</div>
+            <div>'.$tensp.'</div>
+            <div>'.$anhsp.'</div>
+            <div>'.get_ttdh($trangthai).'</div>
+            <div>'.get_pttt($pttt).'</div>
+            <div>'.$gia.'</div>
+            <div>'.$soluong.'</div>
+            <div>'.$gia * $soluong.'</div>
+            <div><a href="'.$suabill.'"><input type="button" value="Sửa"></a>
+            </div>';
             
         }
         ?>
