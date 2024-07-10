@@ -1,0 +1,149 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    
+    margin: 6vh 9vw 6vh 9vw;
+}
+
+main {
+    width: 100%;
+    height: auto;
+}
+
+.banner-product {
+    position: relative;
+}
+
+.banner-product img {
+    width: 100%;
+    height: 60vh;
+    border-radius: 6px;
+}
+
+.banner-product p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    color: white;
+    
+}
+
+.banner-product button {
+    position: absolute;
+    top: 60%;
+    left: 45%;
+    color: white;
+    background-color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    
+}
+.banner-product button:active {
+    color: green;
+}
+
+
+ul,li,a {
+    margin: 1vh 0 6vh 0;
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-right: 3vw;
+    font-size: large;
+    font-weight: bold;
+}
+ul,li,a:active {
+    color: red;
+}
+
+.box-product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+   
+}
+.product img {
+    width: 100%;
+    height: 45vh;
+    margin-right: 3vw;
+    border-radius: 6px;
+    width: 20vw;
+    
+}
+
+
+.product {
+    color: red;
+
+    
+}
+.product a {
+    text-decoration: underline;
+}
+
+.btn-more {
+    margin-top: 3vh;
+    text-align: center;
+    
+}
+.btn-more button {
+    padding: 2vh 4vw 2vh 4vw;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.btn-more button:hover {
+    background-color: black;
+    color: wheat;
+}
+.btn-more button:active {
+    color: green;
+}
+
+.row-sp {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box-product {
+    flex: 0 0 calc(33.33% - 50px);
+    margin-right: 25px;
+    margin-bottom: 40px;
+    position: relative;
+    width: 100%;
+}
+
+
+
+.product img {
+    width: 19.5vw;
+    height: 50vh;
+    border: 1px solid greenyellow;
+}
+
+
+.btnadd {
+    position: absolute;
+    
+
+}
+
+.product strong {
+    margin-top: 60px;
+}
+

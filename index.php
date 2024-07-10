@@ -1,90 +1,58 @@
 <?php
-
-  include "../model/danhmuc.php";
-  include "../model/sanpham.php";
-  include "../model/donhang.php";
-  include '../model/pdo.php';
-  include "../model/taikhoan.php";
-  include "header.php";
+    include "./model/pdo.php";
+    include "./model/danhmuc.php";
+    include "./view/header.php";  
+    include "./model/sanpham.php";
+    include "./global.php";
 
 
-  //controller
-  if(isset($_GET['act'])){
-    $act = $_GET['act'];
-    switch ($act) {
-     
-
-          case 'dskh':
-                        
-            $listtaikhoan =loadall_taikhoan();
-            include "taikhoan/list.php"; 
-            break;           
-           
-            case 'xoatk':
-               if(isset($_GET['id']) && ($_GET['id']>0)){
-                   delete_taikhoan($_GET['id']);
-               }
-               $listtaikhoan =loadall_taikhoan();
-                include "taikhoan/list.php";
-                break;        
-
-        case 'suatk':
-           if(isset($_GET['id']) && ($_GET['id']>0)){
-               $taikhoan_one = loadone_taikhoan($_GET['id']);
-           }
-           
-           include "taikhoan/update.php"; 
-       break;
-       
-       case 'updatetk':
-           if(isset($_POST['capnhat']) &&($_POST['capnhat'])){
-           $id =$_POST['id'];
-           $user =$_POST['user'];
-           $pass=$_POST['pass'];
-           $email =$_POST['email'];
-           $diachi =$_POST['diachi'];
-           $tel=$_POST['tel'];
-           $role =$_POST['role'];
-           $hinh = $_FILES['hinh']['name'];
-           $target_dir ="../uploads/";
-           $target_file = $target_dir.basename($_FILES["hinh"]["name"]);
-           move_uploaded_file($_FILES["hinh"]["tmp_name"],$target_file);
-           
-           update_taikhoan_admin($id,$user,$pass,$email,$diachi,$tel,$role,$hinh);
-           // $thongbao ="Cập nhậttài khoản thành công!";
-           }
-           $listtaikhoan =loadall_taikhoan();
-           include "taikhoan/list.php";
-           break;
-       case'addtk':
-          if(isset($_POST['themmoi']) && ($_POST['themmoi'] )){
-           $user =$_POST['user'];
-           $pass =$_POST['pass'];
-           $email =$_POST['email'];
-           $diachi =$_POST['diachi'];
-           $tel =$_POST['tel'];
-           $role =$_POST['role'];
-           $hinh = $_FILES['hinh']['name'];
-           $target_dir ="../uploads/";
-           $target_file = $target_dir.basename($_FILES["hinh"]["name"]);
-           move_uploaded_file($_FILES["hinh"]["tmp_name"],$target_file);
-           insert_taikhoan_admin($user,$pass,$email,$diachi,$tel,$role,$hinh);
-           $thongbao ="Thêm mới thành công!";
-          }
-           
-          include "taikhoan/add.php"; 
-           break;
-
-          
-        default:
-          include 'home.php';
-          break;
-          
+    $spnew = loadall_sanpham_top10();
+    if((isset($_GET['act'])&&($_GET['act'] != ""))){
+        $act = $_GET['act'];
+        switch($act)
+        {
+            case 'new':
+                if(isset($_POST['kyw'])&&($_POST['kyw']!="")){
+                    $kyw=$_POST['kyw'];
+                 }else{
+                     $kyw="";
+                 }
+                 if(isset($_GET['id_dm'])&&($_GET['id_dm']>0)){
+                     $id_dm=$_GET['id_dm'];                               
+                     
+                 }else{
+                     $id_dm=0;
+                 }
+                 $dssp=loadall_sanpham($kyw, $id_dm);
+                 $tendm = loadone_sanpham($id_dm);
+                 include "view/sanpham.php";
+                 break;
+            case 'used':
+                include "./view/used.php";
+                break;
+            case 'hot':
+                include "./view/hot.php";
+                break;
+            case 'famous':
+                include "./view/famous.php";
+                break;
+            case 'limited';
+                include "./view/limited.php";
+                break;
+            case 'sanphamct':
+                include "./view/sanphamct.php";
+                break;
+            default:
+                echo "Không có chức năng này";
+            break;
+        }
+        
     }
-  }else{
+    else {
+        include "./view/sanpham.php";
+    }
+
     
-  }
+    include "./view/footer.php";
 
-
-  
 ?>

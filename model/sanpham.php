@@ -8,7 +8,7 @@ function delete_sanpham($id_sp){
     pdo_execute($sql);
 }
 function loadall_sanpham_top10(){
-    $sql="select * from sanpham where 1 order by luotxem desc limit 0,10";
+    $sql="select * from sanpham where 1 order by luotxem desc limit 0,9";
     $listsanpham=pdo_query($sql);
     return $listsanpham;
 }
@@ -17,6 +17,7 @@ function loadall_sanpham_home(){
     $listsanpham=pdo_query($sql);
     return $listsanpham;
 }
+
 function loadall_sanpham($kyw="", $id_dm=0){
     $sql="select * from sanpham where 1";
     if($kyw!=""){

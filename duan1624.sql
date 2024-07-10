@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2024 at 05:30 AM
+-- Generation Time: Jul 10, 2024 at 06:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -51,8 +51,67 @@ CREATE TABLE `danhmuc` (
 --
 
 INSERT INTO `danhmuc` (`id_dm`, `tendm`) VALUES
-(1, 'Bonest Gatti'),
-(2, 'apple');
+(1, 'dm-1'),
+(2, 'dm-2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `donhang`
+--
+
+CREATE TABLE `donhang` (
+  `id` int(11) NOT NULL,
+  `id_sp` int(11) NOT NULL,
+  `tensp` varchar(255) NOT NULL,
+  `anhsp` varchar(255) NOT NULL,
+  `trangthai` int(11) NOT NULL COMMENT '0. Đơn hàng mới 1. Đang xử lý 2. Đang giao hàng 3. Đã giao hàng	',
+  `pttt` tinyint(4) NOT NULL COMMENT '1. Thanh toán trực tiếp 2. Chuyển khoản 3. Thanh toán online',
+  `soluong` double NOT NULL,
+  `gia` int(11) NOT NULL,
+  `tonggia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `donhang`
+--
+
+INSERT INTO `donhang` (`id`, `id_sp`, `tensp`, `anhsp`, `trangthai`, `pttt`, `soluong`, `gia`, `tonggia`) VALUES
+(1, 1, 'sp-mau', 'b.webp', 1, 1, 2, 70000, 140000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hoadon`
+--
+
+CREATE TABLE `hoadon` (
+  `bill_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `ten` text NOT NULL,
+  `email` text NOT NULL,
+  `tel` text NOT NULL,
+  `address` text NOT NULL,
+  `trangthai` text NOT NULL,
+  `trangthai_tt` text NOT NULL,
+  `tongtien` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hoadonhang`
+--
+
+CREATE TABLE `hoadonhang` (
+  `hdh_id` int(11) NOT NULL,
+  `bill_id` int(11) NOT NULL,
+  `id_sp` int(11) NOT NULL,
+  `soluong` int(11) NOT NULL,
+  `tensp` text NOT NULL,
+  `giasale` double NOT NULL,
+  `anhsp` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -66,15 +125,37 @@ CREATE TABLE `sanpham` (
   `anhsp` text NOT NULL,
   `giasp` double NOT NULL,
   `mota` text NOT NULL,
-  `id_dm` int(11) NOT NULL
+  `id_dm` int(11) NOT NULL,
+  `gianhap` double NOT NULL,
+  `luotxem` int(11) NOT NULL,
+  `giasale` double NOT NULL,
+  `giaban` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sanpham`
 --
 
-INSERT INTO `sanpham` (`id_sp`, `tensp`, `anhsp`, `giasp`, `mota`, `id_dm`) VALUES
-(1, 'Bonest Gatti - Nam BG9970-A2 Size 45mm	', 'dh2.webp', 5.9, 'Một trong những điểm nổi bật của Bonest Gatti BG5602 chính là thiết kế độc đáo và năng động. Chiếc đồng hồ này được thiết kế với mặt đồng hồ vuông vắn, với các đường nét cắt xẻ táo bạo, mang lại một vẻ ngoài đầy hiện đại và cá tính. Bên cạnh đó, vỏ đồng hồ được làm từ chất liệu thép không gỉ cao cấp, giúp đảm bảo độ bền và khả năng chống nước tốt, giúp bạn hoạt động mà không cần phải lo lắng về sự hư hỏng hay thấm nước.', 1);
+INSERT INTO `sanpham` (`id_sp`, `tensp`, `anhsp`, `giasp`, `mota`, `id_dm`, `gianhap`, `luotxem`, `giasale`, `giaban`) VALUES
+(21, 'Timeless Classic', '../img/f.webp', 8446556, 'Phong cách đậm', 1, 2000, 20, 100, 1900),
+(22, 'Midnight Glow', '../img/b.webp', 9164708, 'Hiện đại và thanh lịch', 1, 0, 0, 0, 0),
+(23, 'Urban Navigator', '../img/c.webp', 783871, 'Thiết kế gọn nhẹ', 1, 0, 0, 0, 0),
+(24, 'Rose Gold Elegance', '../img/d.webp', 15825231, 'Sang trọng với vàng hồng', 1, 0, 0, 0, 0),
+(25, 'Sporty Chrono', '../img/e.webp', 17674543, 'Mạnh mẽ với chức năng Chrono', 2, 0, 0, 0, 0),
+(26, 'Vintage Charm', '../img/f.webp', 1497021, 'Lôi cuốn với phong cách cổ điển', 2, 0, 0, 0, 0),
+(27, 'Tech Savvy', '../img/g.webp', 13561479, 'Sành điệu với công nghệ mới', 2, 0, 0, 0, 0),
+(28, 'Diamond Luxe', '../img/h.webp', 4216334, 'Lấp lánh với kim cương', 2, 0, 0, 0, 0),
+(29, 'Titanium Edge', '../img/i.webp', 97231, 'Độ bền cao với chất liệu Titanium', 3, 0, 0, 0, 0),
+(30, 'Retro Revival', '../img/j.webp', 7537153, 'Tinh tế và lôi cuốn', 3, 0, 0, 0, 0),
+(31, 'Sea Explorer', '../img/k.webp', 17694071, 'Thần thái biển cả', 3, 0, 0, 0, 0),
+(32, 'City Sleek', '../img/l.webp', 6758900, 'Phong cách đô thị', 4, 0, 0, 0, 0),
+(33, 'Bold Statement', '../img/m.webp', 412288, 'Táo bạo và nổi bật', 4, 0, 0, 0, 0),
+(34, 'Modern Minimalist', '../img/n.webp', 1484740, 'Đơn giản và hiện đại', 4, 0, 0, 0, 0),
+(35, 'Chronograph Cruiser', '../img/o.webp', 6186838, 'Năng động với chức năng Chronograph', 4, 0, 0, 0, 0),
+(36, 'Aviator Ace', '../img/p.webp', 6779967, 'Mạnh mẽ với phong cách phi công', 1, 0, 0, 0, 0),
+(37, 'Crystal Cascade', '../img/q.webp', 15339325, 'Lấp lánh với pha lê', 2, 0, 0, 0, 0),
+(38, 'Swiss Precision', '../img/r.webp', 16956722, 'Sự chính xác từ Thụy Sĩ', 1, 0, 0, 0, 0),
+(39, 'Dapper Gent', '../img/s.webp', 19065638, 'Phong cách lịch lãm', 2, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -85,9 +166,9 @@ INSERT INTO `sanpham` (`id_sp`, `tensp`, `anhsp`, `giasp`, `mota`, `id_dm`) VALU
 CREATE TABLE `taikhoan` (
   `id` int(11) NOT NULL,
   `user` varchar(50) NOT NULL,
-  `anh` text NOT NULL,
   `pass` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `anh` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `tel` varchar(20) NOT NULL,
   `role` tinyint(4) NOT NULL
@@ -97,9 +178,28 @@ CREATE TABLE `taikhoan` (
 -- Dumping data for table `taikhoan`
 --
 
-INSERT INTO `taikhoan` (`id`, `user`, `anh`, `pass`, `email`, `address`, `tel`, `role`) VALUES
-(2, 'admin', '', '1', 'linhakira96@gmail.com', 'Thái Bình', '0982345261', 1),
-(3, '2', '', 'a', 'ljnhakira96@gmail.com', '', '', 0);
+INSERT INTO `taikhoan` (`id`, `user`, `pass`, `email`, `anh`, `address`, `tel`, `role`) VALUES
+(2, 'admin', '1', 'linhakira96@gmail.com', '', 'Thái Bình', '0982345261', 1),
+(3, '2', 'a', 'ljnhakira96@gmail.com', '', '', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `voucher`
+--
+
+CREATE TABLE `voucher` (
+  `id` int(11) NOT NULL,
+  `ten_voucher` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `voucher`
+--
+
+INSERT INTO `voucher` (`id`, `ten_voucher`) VALUES
+(1, 'Giảm giá ưu đãi 15% miễn phí ship'),
+(2, 'Giảm giá đặc biệt 30% miễn phí ship');
 
 --
 -- Indexes for dumped tables
@@ -120,6 +220,25 @@ ALTER TABLE `danhmuc`
   ADD PRIMARY KEY (`id_dm`);
 
 --
+-- Indexes for table `donhang`
+--
+ALTER TABLE `donhang`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_sp` (`id_sp`);
+
+--
+-- Indexes for table `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD PRIMARY KEY (`bill_id`);
+
+--
+-- Indexes for table `hoadonhang`
+--
+ALTER TABLE `hoadonhang`
+  ADD PRIMARY KEY (`hdh_id`);
+
+--
 -- Indexes for table `sanpham`
 --
 ALTER TABLE `sanpham`
@@ -129,6 +248,12 @@ ALTER TABLE `sanpham`
 -- Indexes for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `voucher`
+--
+ALTER TABLE `voucher`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -148,16 +273,40 @@ ALTER TABLE `danhmuc`
   MODIFY `id_dm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `donhang`
+--
+ALTER TABLE `donhang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `hoadon`
+--
+ALTER TABLE `hoadon`
+  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hoadonhang`
+--
+ALTER TABLE `hoadonhang`
+  MODIFY `hdh_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `id_sp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_sp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `voucher`
+--
+ALTER TABLE `voucher`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
