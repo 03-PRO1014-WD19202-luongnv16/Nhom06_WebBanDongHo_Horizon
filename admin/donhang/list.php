@@ -1,27 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 <div class="row">
     <div class="row frmtitle mb">
-        <h1>Danh sách đơn hàng</h1>
+        <center><h1>Danh sách đơn hàng</h1></center>
     </div>
     <form action="index.php?act=listdonhang" method="post">
         <input type="text" name="kyw" placeholder="Nhập mã đơn" id="">
-        <input type="submit" name="listok" value="GO">
+        <input type="submit" name="listok" value="Tìm kiếm">
     </form>
     <div class="row mb10 frmdsloai">
-    <table>
+    <table >
 
-        <div>
-            <h3></h3>
-            <h3>MÃ</h3>
-            <h3>MÃ SP</h3>
-            <h3>TÊN SP</h3>
-            <h3>ẢNH SP</h3>
-            <h3>TRẠNG THÁI</h3>
-            <h3>PTTT</h3>
-            <h3>GIÁ SP</h3>
-            <h3>SỐ LƯỢNG</h3>
-            <h3>THÀNH TIỀN</h3>
+        <tr>
+            <th></th>
+            <th>MÃ</th>
+            <th>MÃ SP</th>
+            <th>TÊN SP</th>
+            <th>ẢNH SP</th>
+            <th>TRẠNG THÁI</th>
+            <th>PTTT</th>
+            <th>GIÁ SP</th>
+            <th>SỐ LƯỢNG</th>
+            <th>THÀNH TIỀN</th>
            
-        </div>
+        </tr>
 
         <?php
         foreach($listdonhang as $list){
@@ -37,19 +45,20 @@
             // <br>'.$bill["bill_email"].'</br>'.$bill["bill_address"].' '.$bill["bill_tel"];
             // $ttdh=get_ttdh($bill['bill_status']);
             // $countsp=loadall_cart_coubt($bill['id']);
-            echo '<div>
-            <input type="checkbox">
-            <div>'.$id.'</div>
-            <div>'.$id_sp.'</div>
-            <div>'.$tensp.'</div>
-            <div>'.$anhsp.'</div>
-            <div>'.get_ttdh($trangthai).'</div>
-            <div>'.get_pttt($pttt).'</div>
-            <div>'.$gia.'</div>
-            <div>'.$soluong.'</div>
-            <div>'.$gia * $soluong.'</div>
-            <div><a href="'.$suabill.'"><input type="button" value="Sửa"></a>
-            </div>';
+            echo '<tr>
+            <th><input type="checkbox"></th>
+            <th>'.$id.'</th>
+            <th>'.$id_sp.'</th>
+            <th>'.$tensp.'</th>
+            <th>'.$anhsp.'</th>
+            <th>'.get_ttdh($trangthai).'</th>
+            <th>'.get_pttt($pttt).'</th>
+            <th>'.$gia.'</th>
+            <th>'.$soluong.'</th>
+            <th>'.$gia * $soluong.'</th>
+            
+            <th><a href="'.$suabill.'"><input type="button" value="Sửa"></a></th>
+            </th>';
             
         }
         ?>
@@ -63,3 +72,5 @@
     
     </div> 
 </div>  
+</body>
+</html>

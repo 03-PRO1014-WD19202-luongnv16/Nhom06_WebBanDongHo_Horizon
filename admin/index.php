@@ -5,7 +5,7 @@
   include "../model/donhang.php";
   include '../model/pdo.php';
   include "../model/voucher.php";
-  include "header.php";
+  include "sidebar.php";
 
 
   //controller
