@@ -83,7 +83,12 @@ justify-content: space-evenly;
 height:13vw;
 cursor: pointer;
 border-radius:10px;
+transition: 0.3s ease-out;
 }
+.product-img:hover{
+  scale: (1.2);
+  transition: 0.3s ease-out;
+  }
 .product-box{
 width: 13vw;
 background:white;

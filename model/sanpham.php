@@ -1,10 +1,10 @@
 <?php
-function insert_sanpham($tensp,$giasp,$hinh,$mota,$iddm){
-    $sql="insert into sanpham(name,price,img,mota,iddm) values('$tensp','$giasp','$hinh','$mota','$iddm')";
+function insert_sanpham($tensp,$giasp,$anhsp,$mota,$id_dm){
+    $sql="insert into sanpham(name,price,anhsp,mota,id_dm) values('$tensp','$giasp','$anhsp','$mota','$id_dm')";
     pdo_execute($sql);
 }
-function delete_sanpham($id){
-    $sql="delete from sanpham where id=".$id;
+function delete_sanpham($id_sp){
+    $sql="delete from sanpham where id_sp=".$id_sp;
     pdo_execute($sql);
 }
 function loadall_sanpham_top10(){
@@ -13,25 +13,25 @@ function loadall_sanpham_top10(){
     return $listsanpham;
 }
 function loadall_sanpham_home(){
-    $sql="select * from sanpham where 1 order by id desc limit 0,9";
+    $sql="select * from sanpham where 1 order by id_sp desc limit 0,9";
     $listsanpham=pdo_query($sql);
     return $listsanpham;
 }
-function loadall_sanpham($kyw="", $iddm=0){
+function loadall_sanpham($kyw="", $id_dm=0){
     $sql="select * from sanpham where 1";
     if($kyw!=""){
         $sql.=" and name like '%".$kyw."%'";
     }
-    if($iddm>0){
-        $sql.=" and iddm ='".$iddm."'";
+    if($id_dm>0){
+        $sql.=" and id_dm ='".$id_dm."'";
     }
-    $sql.=" order by id desc";
+    $sql.=" order by id_sp desc";
     $listsanpham=pdo_query($sql);
     return $listsanpham;
 }
-function loadone_ten_dm($iddm){
-    if($iddm>0){
-    $sql="select * from danhmuc where id=".$iddm;
+function loadone_ten_dm($id_dm){
+    if($id_dm>0){
+    $sql="select * from danhmuc where id_sp=".$id_dm;
     $dm=pdo_query_one($sql);
     extract($dm);
     return $name;
@@ -39,21 +39,21 @@ function loadone_ten_dm($iddm){
         return "";
     }
 }
-function loadone_sanpham($id){
-    $sql="select * from sanpham where id=".$id;
+function loadone_sanpham($id_sp){
+    $sql="select * from sanpham where id_sp=".$id_sp;
     $sp=pdo_query_one($sql);
     return $sp;
 }
-function load_sanpham_cungloai($id,$iddm){
-    $sql="select * from sanpham where iddm=".$iddm." AND id <>".$id;
+function load_sanpham_cungloai($id_sp,$id_dm){
+    $sql="select * from sanpham where id_dm=".$id_dm." AND id_sp <>".$id_sp;
     $listsanpham=pdo_query($sql);
     return $listsanpham;
 }
-function update_sanpham($id,$iddm,$tensp,$giasp,$mota,$hinh){
-    if($hinh!="")
-       $sql="update sanpham set iddm='".$iddm."',name='".$tensp."',price='".$giasp."',mota='".$mota."',img='".$hinh."' where id=".$id;
+function update_sanpham($id_sp,$id_dm,$tensp,$giasp,$mota,$anhsp){
+    if($anhsp!="")
+       $sql="update sanpham set id_dm='".$id_dm."',name='".$tensp."',price='".$giasp."',mota='".$mota."',anhsp='".$anhsp."' where id_sp=".$id_sp;
     else
-       $sql="update sanpham set iddm='".$iddm."',name='".$tensp."',price='".$giasp."',mota='".$mota."' where id=".$id;
+       $sql="update sanpham set id_dm='".$id_dm."',name='".$tensp."',price='".$giasp."',mota='".$mota."' where id_sp=".$id_sp;
     pdo_execute($sql);
 }
 

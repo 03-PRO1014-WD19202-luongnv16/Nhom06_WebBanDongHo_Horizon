@@ -16,21 +16,23 @@
     $count = 0;
 
     echo '<center><h1 class="title">Sản Phẩm Nổi Bật</h1></center><tr></tr><div class="row ">';
-    foreach ($products as $product) {
+    foreach ($products as $sp) {
         echo '<div class="product-box">';
-        echo '<img src="img/' . $product['anhsp'] . '" alt="" class="product-img">';
-        echo '<h3 class="tensp">' . $product['tensp'] . '</h3>';
-        echo '<p class="giasp">' . $product['giasp'].'VNĐ' . '</p>';
-        echo '<p class="desc">' . $product['mota'] . '</p>';
+        echo '<a href="view/sanphamct.php?id_sp=' . $sp['id_sp'] . '">';
+        echo '<img src="img/' . $sp['anhsp'] . '" alt="" class="product-img">';
+        echo '</a>';
+        echo '<h3 class="tensp">' . $sp['tensp'] . '</h3>';
+        echo '<p class="giasp">' . $sp['giasp'].'VNĐ' . '</p>';
+        echo '<p class="desc">' . $sp['mota'] . '</p>';
         echo '<div class="button">Thêm Vào Giỏ Hàng</div>';
-        echo '</div>';
 
+        echo '</div>';
         $count++;
         if ($count % 4 == 0) {
             echo '</div><div class="row ">';
         }
         if ($count == 12) {
-            echo '</div>'; // Close the previous row
+            echo '</div>';
             echo '<center><a href="tongsp.php"><div class="see-more">Xem thêm ?</div></a></center>'; 
             echo '<center><h1 class="title">Sản Phẩm Hot</h1></center><tr></tr><div class="row ">';
         }

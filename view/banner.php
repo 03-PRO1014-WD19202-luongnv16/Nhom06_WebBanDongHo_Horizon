@@ -8,12 +8,14 @@
         width: 100%;
         height: 70vh;
         overflow: hidden;
+        margin: 2vh 0;
     }
 
     #bannerImage {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius:30px;
     }
 </style>
 </head>
