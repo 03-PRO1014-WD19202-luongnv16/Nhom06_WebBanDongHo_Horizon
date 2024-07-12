@@ -24,8 +24,9 @@
         echo '<h3 class="tensp">' . $sp['tensp'] . '</h3>';
         echo '<p class="giasp">' . $sp['giasp'].'VNĐ' . '</p>';
         echo '<p class="desc">' . $sp['mota'] . '</p>';
-        echo '<div class="button">Thêm Vào Giỏ Hàng</div>';
-
+        echo '<a href="index.php?act=addToCart&id_sp=' . $sp['id_sp'] . '">';
+        echo '<div class="button" >Thêm Vào Giỏ Hàng</div>'; 
+        echo '</a>';
         echo '</div>';
         $count++;
         if ($count % 4 == 0) {

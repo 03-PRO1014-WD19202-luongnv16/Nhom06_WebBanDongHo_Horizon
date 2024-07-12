@@ -58,8 +58,6 @@ box-shadow: 0px 9px 24px 11px rgba(0,0,0,0.27);
 }
 .text-box:hover{
     height: 100%;
-    border-right:1px solid white;
-    border-radius:20px;
     background-color: #d3f1f8;
     transition: 0.3s ease-out;
 }
@@ -102,14 +100,18 @@ box-shadow: 0px 9px 24px 11px rgba(0,0,0,0.27);
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script>
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("show");
-            }
-        });
+    entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+    }
+    });
     });
     const hiddenElement = document.querySelectorAll(".hidden");
     hiddenElement.forEach((el) => observer.observe(el));
+    window.addEventListener("scroll",function(){
+    var header=document.querySelector(".header-menu");
+    header.classList.toggle("sticky", window.scrollY > 0);
+});
     </script>
 <?php
 include "../model/pdo.php";
