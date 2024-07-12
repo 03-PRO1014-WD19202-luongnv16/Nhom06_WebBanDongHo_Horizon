@@ -16,6 +16,7 @@ header{
   display: grid;
   place-items: center;
   transition: 0.3s ease-in;
+  margin-bottom: 20vh;
 
 }
 header-logo{
@@ -29,13 +30,27 @@ border-radius: 10px;
   height: 8dvw;
 }
 .header-menu {
+  position: fixed;
+  top:10dvw;
   margin: 3vh 0;
+  padding-top: 1vh;
   border-top: 1px solid #36454f;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 80dvw;
   height: 8vh;
+  transition: 0.2s ease-out;
+
+  color:#36454f;
+}
+.sticky{
+  border:none;
+  top:0;
+  background-color:white;
+  border-radius:15px;
+  color:#36454f;
+  transition: 0.3s ease-in;
 }
 .items-link {
   text-decoration: none;

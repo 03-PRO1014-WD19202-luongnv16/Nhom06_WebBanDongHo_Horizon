@@ -34,19 +34,9 @@
             </a>
         </nav>
     </header>
+    <div class="test"></div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script>
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("show");
-            }
-        });
-    });
-    const hiddenElement = document.querySelectorAll(".hidden");
-    hiddenElement.forEach((el) => observer.observe(el));
-    </script>
 </body>
 
 </html>

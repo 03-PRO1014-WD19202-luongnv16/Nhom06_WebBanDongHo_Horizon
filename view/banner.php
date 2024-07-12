@@ -8,7 +8,7 @@
         width: 100%;
         height: 70vh;
         overflow: hidden;
-        margin: 2vh 0;
+        margin:5vh 0 ;
     }
 
     #bannerImage {
