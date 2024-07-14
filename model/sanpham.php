@@ -56,31 +56,30 @@ function update_sanpham($id_sp,$id_dm,$tensp,$giasp,$mota,$anhsp){
        $sql="update sanpham set id_dm='".$id_dm."',name='".$tensp."',price='".$giasp."',mota='".$mota."' where id_sp=".$id_sp;
     pdo_execute($sql);
 }function addToCart($id_sp) {
+    $conn = pdo_get_connection();
     
-        $conn = pdo_get_connection();
-        
-        $sql = "SELECT id_cart, quantity FROM cart WHERE id_sp = :id_sp";
+    $sql = "SELECT id_cart, quantity FROM cart WHERE id_sp = :id_sp";
+    $addToCart = $conn->prepare($sql);
+    $addToCart->bindParam(':id_sp', $id_sp);
+    $addToCart->execute();
+    $cartItem = $addToCart->fetch(PDO::FETCH_ASSOC);
+
+    if ($cartItem) {
+        $id_cart = $cartItem['id_cart'];
+        $newQuantity = $cartItem['quantity'] + 1;
+
+        $sql = "UPDATE cart SET quantity = :newQuantity WHERE id_cart = :id_cart";
+        $addToCart = $conn->prepare($sql);
+        $addToCart->bindParam(':newQuantity', $newQuantity);
+        $addToCart->bindParam(':id_cart', $id_cart);
+        $addToCart->execute();
+    } else {
+        $sql = "INSERT INTO cart (id_sp, quantity) VALUES (:id_sp, 1)";
         $addToCart = $conn->prepare($sql);
         $addToCart->bindParam(':id_sp', $id_sp);
         $addToCart->execute();
-        $cartItem = $addToCart->fetch(PDO::FETCH_ASSOC);
-
-        if ($cartItem) {
-            $id_cart = $cartItem['id_cart'];
-            $newQuantity = $cartItem['quantity'] + 1;
-
-            $sql = "UPDATE cart SET quantity = :newQuantity WHERE id_cart = :id_cart";
-            $addToCart = $conn->prepare($sql);
-            $addToCart->bindParam(':newQuantity', $newQuantity);
-            $addToCart->bindParam(':id_cart', $id_cart);
-            $addToCart->execute();
-        } else {
-            $sql = "INSERT INTO cart (id_sp, quantity) VALUES (:id_sp, 1)";
-            $addToCart = $conn->prepare($sql);
-            $addToCart->bindParam(':id_sp', $id_sp);
-            $addToCart->execute();
-        }
-        unset($conn); 
+    }
+    unset($conn); 
 }
 
 function loadall_cart(){
@@ -88,4 +87,10 @@ function loadall_cart(){
     $listcart=pdo_query($sql);
     return $listcart;
 }
+function update_view_count($id_sp) {  
+    $sql = "UPDATE sanpham SET luotxem = luotxem + 1 WHERE id_sp = :id_sp";  
+    pdo_execute($sql, [':id_sp' => $id_sp]);  
+}
+
+
 ?>

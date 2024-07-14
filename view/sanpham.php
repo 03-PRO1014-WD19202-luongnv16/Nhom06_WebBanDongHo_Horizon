@@ -18,7 +18,7 @@
     echo '<center><h1 class="title">Sản Phẩm Nổi Bật</h1></center><tr></tr><div class="row ">';
     foreach ($products as $sp) {
         echo '<div class="product-box hidden">';
-        echo '<a href="view/sanphamct.php?id_sp=' . $sp['id_sp'] . '">';
+        echo '<a href="index.php?act=xemChiTiet&id_sp=' . $sp['id_sp'] . '">';
         echo '<img src="img/' . $sp['anhsp'] . '" alt="" class="product-img">';
         echo '</a>';
         echo '<h3 class="tensp">' . $sp['tensp'] . '</h3>';

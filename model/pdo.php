@@ -17,17 +17,17 @@ function pdo_get_connection(){
  * @param array $args mảng giá trị cung cấp cho các tham số của $sql
  * @throws PDOException lỗi thực thi câu lệnh
  */
-function pdo_execute($sql){
-    $sql_args = array_slice(func_get_args(), 1);
-    try{
+function pdo_execute($sql, $params = []){
+    try {
         $conn = pdo_get_connection();
         $stmt = $conn->prepare($sql);
-        $stmt->execute($sql_args);
-    }
-    catch(PDOException $e){
+        foreach ($params as $key => &$value) {
+            $stmt->bindParam($key, $value);
+        }
+        $stmt->execute();
+    } catch (PDOException $e) {
         throw $e;
-    }
-    finally{
+    } finally {
         unset($conn);
     }
 }
