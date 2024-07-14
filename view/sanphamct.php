@@ -8,6 +8,17 @@
       @import url('https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700&display=swap');
       </style>
       <style>
+        .sticky{
+  border:none;
+  top:0;
+  background: rgba( 255, 255, 255, 0.7 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 3px );
+  -webkit-backdrop-filter: blur( 3px );
+  border-radius:15px;
+  color:#36454f;
+  transition: 0.3s ease-in;
+}
 .detail-container{
   width: 100vw;
   height: 100vh;
@@ -73,11 +84,11 @@ box-shadow: 0px 9px 24px 11px rgba(0,0,0,0.27);
 </head>
 <body>
 <main>
-<header>
+    <header>
         <div class="header-logo hidden">
             <a href="index.php"><img class="web-logo" src="../img/logo.png" alt="Grand Team Logo"></a>
         </div>
-        <nav class="header-menu hidden">
+        <nav class="header-menu sticky hidden">
             <a class="items-link" href="../index.php">
                 <ion-icon class="menu-items" name="home-outline"></ion-icon>
                 <span class="text">Trang chủ</span>
