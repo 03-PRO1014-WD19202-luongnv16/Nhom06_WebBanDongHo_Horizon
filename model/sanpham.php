@@ -1,6 +1,6 @@
 <?php
-function insert_sanpham($tensp,$giasp,$anhsp,$mota,$id_dm){
-    $sql="insert into sanpham(name,price,anhsp,mota,id_dm) values('$tensp','$giasp','$anhsp','$mota','$id_dm')";
+function insert_sanpham($tensp,$giasp,$anhsp,$mota,$id_dm,$luotxem,$date){
+    $sql="insert into sanpham(tensp,giasp,anhsp,mota,id_dm,luotxem,date) values('$tensp','$giasp','$anhsp','$mota','$id_dm','$luotxem','$date')";
     pdo_execute($sql);
 }
 function delete_sanpham($id_sp){
@@ -8,15 +8,18 @@ function delete_sanpham($id_sp){
     pdo_execute($sql);
 }
 function loadall_sanpham_top10(){
-    $sql="select * from sanpham where 1 order by luotxem desc limit 0,10";
-    $listsanpham=pdo_query($sql);
-    return $listsanpham;
+    $sql="select * from sanpham where 1 order by luotxem desc limit 0,9";
+    $listsp=pdo_query($sql);
+    return $listsp;
 }
 function loadall_sanpham_home(){
     $sql="select * from sanpham where 1 order by id_sp desc limit 0,9";
-    $listsanpham=pdo_query($sql);
-    return $listsanpham;
+    $listsp=pdo_query($sql);
+    return $listsp;
 }
+
+
+
 function loadall_sanpham($kyw="", $id_dm=0){
     $sql="select * from sanpham where 1";
     if($kyw!=""){
@@ -26,19 +29,10 @@ function loadall_sanpham($kyw="", $id_dm=0){
         $sql.=" and id_dm ='".$id_dm."'";
     }
     $sql.=" order by id_sp desc";
-    $listsanpham=pdo_query($sql);
-    return $listsanpham;
+    $listsp=pdo_query($sql);
+    return $listsp;
 }
-function loadone_ten_dm($id_dm){
-    if($id_dm>0){
-    $sql="select * from danhmuc where id_sp=".$id_dm;
-    $dm=pdo_query_one($sql);
-    extract($dm);
-    return $name;
-    }else{
-        return "";
-    }
-}
+
 function loadone_sanpham($id_sp){
     $sql="select * from sanpham where id_sp=".$id_sp;
     $sp=pdo_query_one($sql);
@@ -46,16 +40,30 @@ function loadone_sanpham($id_sp){
 }
 function load_sanpham_cungloai($id_sp,$id_dm){
     $sql="select * from sanpham where id_dm=".$id_dm." AND id_sp <>".$id_sp;
-    $listsanpham=pdo_query($sql);
-    return $listsanpham;
+    $listsp=pdo_query($sql);
+    return $listsp;
 }
-function update_sanpham($id_sp,$id_dm,$tensp,$giasp,$mota,$anhsp){
-    if($anhsp!="")
-       $sql="update sanpham set id_dm='".$id_dm."',name='".$tensp."',price='".$giasp."',mota='".$mota."',anhsp='".$anhsp."' where id_sp=".$id_sp;
-    else
-       $sql="update sanpham set id_dm='".$id_dm."',name='".$tensp."',price='".$giasp."',mota='".$mota."' where id_sp=".$id_sp;
-    pdo_execute($sql);
-}function addToCart($id_sp) {
+function update_sanpham($id_sp,$tensp, $anhsp, $giasp, $mota, $id_dm, $luotxem,$date){  
+    if($anhsp !== ""){  
+        $sql = "update sanpham set tensp='$tensp', anhsp='$anhsp', giasp='$giasp', mota='$mota', id_dm='$id_dm', luotxem='$luotxem', date='$date' where id_sp=$id_sp";  
+    } else {  
+        $sql = "update sanpham set tensp='$tensp', anhsp='$anhsp', giasp='$giasp', mota='$mota', id_dm='$id_dm', luotxem='$luotxem',date='$date' where id_sp=$id_sp";  
+    }  
+    pdo_execute($sql);  
+}  
+ ///bộ lọc
+function loadall_sanpham_new(){  
+    $sql= "SELECT * FROM sanpham ORDER BY date DESC LIMIT 10";  
+    $listsp=pdo_query($sql);  
+    return $listsp;  
+}   
+
+function loadall_sanpham_view(){  
+    $sql= "SELECT * FROM sanpham ORDER BY luotxem DESC LIMIT 10";  
+    $listsp=pdo_query($sql);  
+    return $listsp;  
+}  
+function addToCart($id_sp) {
     $conn = pdo_get_connection();
     
     $sql = "SELECT id_cart, quantity FROM cart WHERE id_sp = :id_sp";

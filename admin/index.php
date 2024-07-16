@@ -26,9 +26,9 @@ include '../model/pdo.php';
     $act = $_GET['act'];
     switch ($act) {
       case 'adddm':
-        //Kiểm tra người dùng có click vào nút Add hay không
         if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
-          $tendm=$_POST['tendm'];
+          
+          $tendm = $_POST['tendm'];
           insert_danhmuc($tendm);
           $thongbao="Thêm thành công";
         }
@@ -55,13 +55,16 @@ include '../model/pdo.php';
         if(isset($_POST['capnhat'])&&($_POST['capnhat'])){
           $tendm=$_POST['tendm'];
           $id_dm=$_POST['id_dm'];
-          update_danhmuc($id,$tendm);
+          update_danhmuc($id_dm,$tendm);
           $thongbao="Cập nhật thành công";
         }
         $listdanhmuc=loadAll_danhmuc();
         include './danhmuc/list.php';
         break;
-        // SẢN PHẨM
+
+
+
+        ///////////////////////////// SẢN PHẨM
       case 'addsp':
         //Kiểm tra người dùng có click vào nút Add hay không
         if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
@@ -69,14 +72,16 @@ include '../model/pdo.php';
           $tensp=$_POST['tensp'];
           $giasp=$_POST['giasp'];
           $mota=$_POST['mota'];
-          $target_dir = "./img/";
+          $luotxem=$_POST['luotxem'];
+          $date=$_POST['date'];
+          $target_dir = "../img/";
           $anhsp=$_FILES['anhsp']['name'];
           $target_file = $target_dir . basename($_FILES['anhsp']['name']);
           if(move_uploaded_file($_FILES['anhsp']['tmp_name'], $target_file)){
           }else{
              echo 'Lỗi';
           }
-          insert_sanpham($tensp,$giasp,$anhsp,$mota,$id_dm);
+          insert_sanpham($tensp,$giasp,$anhsp,$mota,$id_dm,$luotxem,$date);
           $thongbao="Thêm thành công";
         }
         $listdanhmuc=loadAll_danhmuc();
@@ -95,40 +100,43 @@ include '../model/pdo.php';
         include './sanpham/list.php';
         break;
       case 'xoasp':
-        if(isset($_GET['id'])&&($_GET['id']>0)){
-          delete_sanpham($_GET['id_sp']);
-        }
+        if(isset($_GET['id_sp']) && ($_GET['id_sp'] > 0)){  
+          delete_sanpham($_GET['id_sp']);  
+        } 
+
         $listsanpham=loadAll_sanpham("",0);
         include './sanpham/list.php';
         break;
-      case 'suasp':
-        if(isset($_GET['id_sp'])&&($_GET['id_sp']>0)){
-          $sanpham= loadOne_sanpham($_GET['id_sp']);
-        }
-        $listdanhmuc=loadAll_danhmuc();
-        include "./sanpham/update.php";
-        break;
-      case 'updatesp':
-        if(isset($_POST['capnhat'])&&($_POST['capnhat'])){
-          $id_sp=$_POST['id_sp'];
-          $id_dm=$_POST['id_dm'];
-          $tensp=$_POST['tensp'];
-          $giasp=$_POST['giasp'];
-          $mota=$_POST['mota'];
-          $anhsp=$_FILES['anhsp']['name'];
-          $target_dir = "./img/";
-          $target_file = $target_dir . basename($_FILES['anhsp']['name']);
-          if(move_uploaded_file($_FILES['anhsp']['tmp_name'], $target_file)){
-            // echo 'The file'. htmlspecialchars( basename( $_FILES['anhsp']['name'])). 'has been uploaded.';
-          }else{
-            // echo 'Sorry, there was an error uploading your file.';
+        case 'suasp':
+          if(isset($_GET['id_sp'])&&($_GET['id_sp']>0)){
+            $sanpham= loadOne_sanpham($_GET['id_sp']);
           }
-          update_sanpham($id_sp,$id_dm,$tensp,$giasp,$mota,$anhsp);
-        }
-        $listdanhmuc=loadAll_danhmuc();
-        $listsanpham=loadAll_sanpham("",0);
-        include './sanpham/list.php';
-        break;
+          $listdanhmuc=loadAll_danhmuc();
+          include "./sanpham/update.php";
+          break;
+        case 'updatesp':
+          if(isset($_POST['capnhat'])&&($_POST['capnhat'])){
+            $id_sp=$_POST['id_sp'];
+            $id_dm=$_POST['id_dm'];
+            $tensp=$_POST['tensp'];
+            $giasp=$_POST['giasp'];
+            $mota=$_POST['mota'];
+            $luotxem=$_POST['luotxem'];
+            $date=$_POST['date'];
+            $hinh=$_FILES['hinh']['name'];
+            $target_dir = "../img/";
+            $target_file = $target_dir . basename($_FILES['hinh']['name']);
+            if(move_uploaded_file($_FILES['hinh']['tmp_name'], $target_file)){
+              
+            }else{
+              
+            }
+            update_sanpham($id_sp,$tensp, $hinh, $giasp, $mota, $id_dm, $luotxem,$date);
+          }
+          $listdanhmuc=loadAll_danhmuc();
+          $listsanpham=loadAll_sanpham("",0);
+          include './sanpham/list.php';
+          break;
         case 'listdonhang':
           $listdonhang=loadAll_donhang();
           include './donhang/list.php';
