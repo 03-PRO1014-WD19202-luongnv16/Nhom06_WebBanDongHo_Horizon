@@ -1,16 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700&display=swap');
-    </style>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
     <?php
 include '../model/pdo.php';
  include "../model/taikhoan.php";
@@ -20,14 +7,12 @@ include '../model/pdo.php';
   include "../model/voucher.php";
   include "sidebar.php";
 
-
   //controller
   if(isset($_GET['act'])){
     $act = $_GET['act'];
     switch ($act) {
       case 'adddm':
         if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
-          
           $tendm = $_POST['tendm'];
           insert_danhmuc($tendm);
           $thongbao="Thêm thành công";
@@ -61,16 +46,12 @@ include '../model/pdo.php';
         $listdanhmuc=loadAll_danhmuc();
         include './danhmuc/list.php';
         break;
-
-
-
-        ///////////////////////////// SẢN PHẨM
       case 'addsp':
-        //Kiểm tra người dùng có click vào nút Add hay không
         if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
           $id_dm=$_POST['id_dm'];
           $tensp=$_POST['tensp'];
           $giasp=$_POST['giasp'];
+          $soluong=$_POST['soluong'];
           $mota=$_POST['mota'];
           $luotxem=$_POST['luotxem'];
           $date=$_POST['date'];
@@ -81,7 +62,7 @@ include '../model/pdo.php';
           }else{
              echo 'Lỗi';
           }
-          insert_sanpham($tensp,$giasp,$anhsp,$mota,$id_dm,$luotxem,$date);
+          insert_sanpham($tensp,$giasp,$anhsp,$soluong,$mota,$id_dm,$luotxem,$date);
           $thongbao="Thêm thành công";
         }
         $listdanhmuc=loadAll_danhmuc();
@@ -120,6 +101,7 @@ include '../model/pdo.php';
             $id_dm=$_POST['id_dm'];
             $tensp=$_POST['tensp'];
             $giasp=$_POST['giasp'];
+            $soluong=$_POST['soluong'];
             $mota=$_POST['mota'];
             $luotxem=$_POST['luotxem'];
             $date=$_POST['date'];
@@ -131,7 +113,7 @@ include '../model/pdo.php';
             }else{
               
             }
-            update_sanpham($id_sp,$tensp, $hinh, $giasp, $mota, $id_dm, $luotxem,$date);
+            update_sanpham($id_sp,$tensp, $hinh, $giasp,$soluong, $mota, $id_dm, $luotxem,$date);
           }
           $listdanhmuc=loadAll_danhmuc();
           $listsanpham=loadAll_sanpham("",0);
@@ -204,63 +186,55 @@ include '../model/pdo.php';
               $listtaikhoan =loadall_taikhoan();
                 include "taikhoan/list.php";
                 break;        
-
-        case 'suatk':
-          if(isset($_GET['id']) && ($_GET['id']>0)){
-              $taikhoan_one = loadone_taikhoan($_GET['id']);
-          }
+              case 'suatk':
+                if(isset($_GET['id']) && ($_GET['id']>0)){
+                    $taikhoan_one = loadone_taikhoan($_GET['id']);
+                }
+                
+                include "taikhoan/update.php"; 
+              break;
           
-          include "taikhoan/update.php"; 
-      break;
-      
-      case 'updatetk':
-          if(isset($_POST['capnhat']) &&($_POST['capnhat'])){
-          $id =$_POST['id'];
-          $user =$_POST['user'];
-          $pass=$_POST['pass'];
-          $email =$_POST['email'];
-          $diachi =$_POST['diachi'];
-          $tel=$_POST['tel'];
-          $role =$_POST['role'];
-          $hinh = $_FILES['hinh']['name'];
-          $target_dir ="../uploads/";
-          $target_file = $target_dir.basename($_FILES["hinh"]["name"]);
-          move_uploaded_file($_FILES["hinh"]["tmp_name"],$target_file);
-          
-          update_taikhoan_admin($id,$user,$pass,$email,$diachi,$tel,$role,$hinh);
-          // $thongbao ="Cập nhậttài khoản thành công!";
-          }
-          $listtaikhoan =loadall_taikhoan();
-          include "taikhoan/list.php";
-          break;
-      case'addtk':
-          if(isset($_POST['themmoi']) && ($_POST['themmoi'] )){
-          $user =$_POST['user'];
-          $pass =$_POST['pass'];
-          $email =$_POST['email'];
-          $diachi =$_POST['diachi'];
-          $tel =$_POST['tel'];
-          $role =$_POST['role'];
-          $hinh = $_FILES['hinh']['name'];
-          $target_dir ="../uploads/";
-          $target_file = $target_dir.basename($_FILES["hinh"]["name"]);
-          move_uploaded_file($_FILES["hinh"]["tmp_name"],$target_file);
-          insert_taikhoan_admin($user,$pass,$email,$diachi,$tel,$role,$hinh);
-          $thongbao ="Thêm mới thành công!";
-          }
-          
-          include "taikhoan/add.php"; 
-          break;
-
-
-      
-          
+              case 'updatetk':
+                  if(isset($_POST['capnhat']) &&($_POST['capnhat'])){
+                  $id =$_POST['id'];
+                  $user =$_POST['user'];
+                  $pass=$_POST['pass'];
+                  $email =$_POST['email'];
+                  $diachi =$_POST['diachi'];
+                  $tel=$_POST['tel'];
+                  $role =$_POST['role'];
+                  $hinh = $_FILES['hinh']['name'];
+                  $target_dir ="../img/";
+                  $target_file = $target_dir.basename($_FILES["hinh"]["name"]);
+                  move_uploaded_file($_FILES["hinh"]["tmp_name"],$target_file);
+                  
+                  update_taikhoan_admin($id,$user,$pass,$email,$diachi,$tel,$role,$hinh);
+                  // $thongbao ="Cập nhậttài khoản thành công!";
+                  }
+                  $listtaikhoan =loadall_taikhoan();
+                  include "taikhoan/list.php";
+                  break;
+              case'addtk':
+                  if(isset($_POST['themmoi']) && ($_POST['themmoi'] )){
+                  $user =$_POST['user'];
+                  $pass =$_POST['pass'];
+                  $email =$_POST['email'];
+                  $diachi =$_POST['diachi'];
+                  $tel =$_POST['tel'];
+                  $role =$_POST['role'];
+                  $hinh = $_FILES['hinh']['name'];
+                  $target_dir ="../img/";
+                  $target_file = $target_dir.basename($_FILES["hinh"]["name"]);
+                  move_uploaded_file($_FILES["hinh"]["tmp_name"],$target_file);
+                  insert_taikhoan_admin($user,$pass,$email,$diachi,$tel,$role,$hinh);
+                  $thongbao ="Thêm mới thành công!";
+                  }
+                  
+                  include "taikhoan/add.php"; 
+                  break;
       default:
       include "home.php";
       break;     
     }
   }
 ?>
-</body>
-
-</html>

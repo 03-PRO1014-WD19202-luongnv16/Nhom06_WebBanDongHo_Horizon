@@ -51,9 +51,55 @@ if (isset($_GET['act'])) {
             if (isset($_GET['id_sp'])) {  
                 $id_sp = $_GET['id_sp'];  
                 addToCart($id_sp);  
-                
             }  
-            break;       
+            break;
+        case 'dangnhap':
+            if (isset($_POST['dangnhap'])) {
+                $user = $_POST['user'];
+                $pass = $_POST['pass'];
+                $checkuser = check_user($user, $pass);
+                if (is_array($checkuser)) {
+                    $_SESSION['user'] = $checkuser;
+                    header("Location: index.php");
+                    exit;
+                } else {
+                    $thongbao = "Tài khoản không tồn tại. Vui lòng đăng ký hoặc đăng nhập lại!";
+                }
+                $showProductList = false;
+            }
+            
+            include "view/login.php";
+            break;
+        case 'dangky':
+            if (isset($_POST['dangky'])) {
+                $email = $_POST['email'];
+                $user = $_POST['user'];
+                $pass = $_POST['pass'];
+                insert_taikhoan($email, $user, $pass);
+                $thongbao = "Đã đăng ký thành công!";
+                $showProductList = false;
+            }
+            include "view/dangnhap.php";
+            
+            break;
+        case 'quenmk':
+            if (isset($_POST['guiemail'])) {
+                $email = $_POST['email'];
+                $checkemail = check_email($email);
+                if (is_array($checkemail)) {
+                    $thongbao = "Mật khẩu của bạn là: " . $checkemail['pass'];
+                } else {
+                    $thongbao = "Email không tồn tại";
+                }
+                $showProductList = false;
+            }
+            include "view/forgot.php";
+            
+            break;
+        case 'dangxuat':
+            session_unset();
+            header('Location: index.php');
+            exit;           
     }  
 }
 
