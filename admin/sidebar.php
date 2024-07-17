@@ -2,70 +2,71 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="test.css">
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700&display=swap');
     </style>
     <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Kodchasan", sans-serif;
-    }
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Kodchasan", sans-serif;
+}
 
-    a {
-        text-decoration: none;
-        color: white;
-    }
+a {
+    text-decoration: none;
+    color: white;
+}
 
-    body {
-        display: flex;
-        align-items: center;
-    }
+body {
+    display: flex;
+    align-items: center;
+    
+}
+   .sidebar {
+    display: grid;
+    align-items: center;
+    width: 15%;
+    height: 100vh;
+    background-color: #293540;
+    font-size: 0.85dvw;
+    position: fixed;
+    bottom:0;
+}
 
-    .sidebar {
-        display: grid;
-        align-items: center;
-        width: 15%;
-        height: 100vh;
-        background-color: #293540;
-        font-size: 0.85dvw;
-    }
+.logo {
+    width: 50%;
+    align-self: center;
+    border-radius: 20px;
+}
 
-    .logo {
-        width: 50%;
-        align-self: center;
-        border-radius: 20px;
-    }
+.items-container {
+    display: grid;
+    margin-left: 10%;
+    width: 100%;
+    height: 100%;
+}
 
-    .items-container {
-        display: grid;
-        margin-left: 10%;
-        width: 100%;
-        height: 100%;
-    }
+.sidebar-items {
+    margin: 5%;
+    padding: 3%;
+    border-radius: 20px 0 0 20px;
+    transition: 0.3s ease-out;
+}
 
-    .sidebar-items {
-        margin: 5%;
-        padding: 3%;
-        border-radius: 20px 0 0 20px;
-        transition: 0.3s ease-out;
-    }
+.sidebar-items:hover {
+    background-color: white;
+    color: #293540;
+    transition: 0.3s ease-in;
+}
 
-    .sidebar-items:hover {
-        background-color: white;
-        color: #293540;
-        transition: 0.3s ease-in;
-    }
-
-    .logout-button {
-        padding: 5%;
-        background-color: #DA3232;
-        color: white;
-        cursor: pointer;
-        border-radius: 20px;
-    }
+.logout-button {
+    padding: 5%;
+    background-color: #DA3232;
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
+}
     </style>
 </head>
 

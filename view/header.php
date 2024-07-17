@@ -40,10 +40,22 @@
                         <ion-icon class="menu-items" name="cart-outline"></ion-icon>
                         <span class="text">Giỏ Hàng</span>
                     </div>
-                    <a class="items-link" href="index.php?act=login">
-                        <ion-icon class="menu-items" name="person-outline"></ion-icon>
-                        <span class="text">Đăng Nhập</span>
-                    </a>
+                    <?php
+                        if (isset($_SESSION['user'])) {
+                            extract($_SESSION['user']);
+                            echo ' <a class="items-link" href="index.php?act=dangxuat">
+                                        <span>  '.$user.'</span>
+                                        <span class="text">Thoát</span>
+
+                                </a>';
+                        } else {
+                                    echo ' <a class="items-link" href="index.php?act=dangnhap">
+                                        <ion-icon class="menu-items" name="person-outline"></ion-icon>
+                                        <span class="text">Đăng Nhập</span>
+
+                                    </a>';
+                                }
+                    ?>
                 </nav>
             </header>
             <div class="sidecart">
