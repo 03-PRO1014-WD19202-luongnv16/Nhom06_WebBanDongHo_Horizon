@@ -83,7 +83,7 @@ body {
             <a href="index.php?act=listthongke" class="sidebar-items">Thống kê</a>
         </div>
         <center>
-            <div class="logout-button">Thoát</div>
+        <a href="index.php?act=dangxuat"><div class="logout-button">Thoát</div></a>
         </center>
     </div>
 </body>

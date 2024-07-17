@@ -1,13 +1,16 @@
     <?php
-include '../model/pdo.php';
- include "../model/taikhoan.php";
-  include "../model/danhmuc.php";
-  include "../model/sanpham.php";
-  include "../model/donhang.php";
-  include "../model/voucher.php";
-  include "sidebar.php";
-
-  //controller
+    session_start();
+    ob_start();
+    include '../model/pdo.php';
+    include "../model/taikhoan.php";
+    include "../model/danhmuc.php";
+    include "../model/sanpham.php";
+    include "../model/donhang.php";
+    include "../model/voucher.php";
+    include "sidebar.php";
+    if(!isset($_SESSION['s_user'])){
+      header('location: ../admin/login.php');
+  }
   if(isset($_GET['act'])){
     $act = $_GET['act'];
     switch ($act) {
@@ -232,6 +235,10 @@ include '../model/pdo.php';
                   
                   include "taikhoan/add.php"; 
                   break;
+              case 'dangxuat':
+                session_unset();
+                header('Location: ../admin/login.php');
+                break;   
       default:
       include "home.php";
       break;     
