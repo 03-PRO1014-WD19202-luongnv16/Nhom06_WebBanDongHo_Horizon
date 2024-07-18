@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Đăng Nhập</title>
+    <title>Trang Đăng Nhập</title>
     <link rel="stylesheet" href="login.css">
 </head>
 
 <body>
     <div class="login-container">
         <div class="tieude-login">
-            <h2>Đăng Nhập</h2>
+            <h2>Tạo tài khoản</h2>
         </div>
-        <div class="form-login  quen-mk">
-            <form action="index.php?act=dangnhap" method="post">
-                <input type="text" placeholder="Tên đăng nhập" required name="user">
+        <div class="form-login creat-account quen-mk">
+            <form action="index.php?act=dangky" method="post">
+                <input type="email" placeholder="Email" required name="email">
+                <input type="text" placeholder="Tên đăng nhập" required name="user">
                 <input type="password" placeholder="Mật khẩu" required name="pass">
-                <input type="submit" value="Đăng nhập" name="dangnhap">
-                <?php
-                if(isset($thongbao) && ($thongbao != "")) echo $thongbao;
-                ?>
+                <input type="submit" value="Đăng ký" name="dangky">
             </form>
         </div>
 
         <div class="links">
             <a href="index.php?act=quenmk">Quên mật khẩu?</a> |
-            <a href="index.php?act=dangky">Tạo tài khoản</a>
+            <a href="index.php?act=dangnhap">Đăng nhập</a>
         </div>
     </div>
 </body>
