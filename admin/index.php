@@ -1,16 +1,17 @@
     <?php
-    session_start();
-    ob_start();
-    include '../model/pdo.php';
-    include "../model/taikhoan.php";
-    include "../model/danhmuc.php";
-    include "../model/sanpham.php";
-    include "../model/donhang.php";
-    include "../model/voucher.php";
-    include "sidebar.php";
-    if(!isset($_SESSION['s_user'])){
-      header('location: ../admin/login.php');
+      session_start();
+      ob_start();
+include '../model/pdo.php';
+ include "../model/taikhoan.php";
+  include "../model/danhmuc.php";
+  include "../model/sanpham.php";
+  include "../model/donhang.php";
+  include "../model/binhluan.php";
+  include "sidebar.php";
+  if(!isset($_SESSION['s_user'])){
+    header('location: ../admin/login.php');
   }
+  //controller
   if(isset($_GET['act'])){
     $act = $_GET['act'];
     switch ($act) {
@@ -128,55 +129,21 @@
           break;
         case 'suadonhang':
           if(isset($_GET['id'])&&($_GET['id']>0)){
-            $dm= loadOne_donhang($_GET['id']);
+            $donhang_one= loadOne_donhang($_GET['id']);
+            $cart_items = load_all_cart_items($_GET['id']); 
           }
           include "./donhang/update.php";
           break;
-        case 'updatedonhang':
+        case 'updatebill':
           if(isset($_POST['capnhat'])&&($_POST['capnhat'])){
-            $trangthai=$_POST['trangthai'];
-            $id=$_POST['id'];
+            $trangthai=$_POST['ttdh'];
+            $id=$_POST['bill_id'];
             update_donhang($id,$trangthai);
             $thongbao="Cập nhật thành công";
           }
           $listdonhang=loadAll_donhang();
           include './donhang/list.php';
-          break;
-        case 'addvoucher':
-          if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
-            $ten_voucher=$_POST['ten_voucher'];
-            insert_danhmuc($ten_voucher);
-            $thongbao="Thêm thành công";
-          }
-          include './voucher/add.php';
-          break;  
-        case 'listvoucher':
-          $listvoucher=loadAll_voucher();
-          include './voucher/list.php';
-          break;
-        case 'xoavoucher':
-          if(isset($_GET['id'])&&($_GET['id']>0)){
-            delete_voucher($_GET['id']);
-          }
-          $listvoucher=loadAll_voucher();
-          include './voucher/list.php';
-          break;
-        case 'suavoucher':
-          if(isset($_GET['id'])&&($_GET['id']>0)){
-            $voucher= loadOne_voucher($_GET['id']);
-          }
-          include "./voucher/update.php";
-          break;
-        case 'updatevoucher':
-          if(isset($_POST['capnhat'])&&($_POST['capnhat'])){
-            $id=$_POST['id'];
-            $ten_voucher=$_POST['ten_voucher'];
-            update_voucher($id,$ten_voucher);
-            $thongbao="Cập nhật thành công";
-          }
-          $listvoucher=loadAll_voucher();
-          include './voucher/list.php';
-          break;     
+          break;    
           case 'dskh':
             $listtaikhoan =loadall_taikhoan();
             include "taikhoan/list.php"; 
@@ -235,12 +202,24 @@
                   
                   include "taikhoan/add.php"; 
                   break;
-              case 'dangxuat':
-                session_unset();
-                header('Location: ../admin/login.php');
-                break;   
+                  case 'list_binhluan':
+                    $list_binhluan = loadall_binhluan(0);
+                    include "binhluan/list.php";
+                    break;
+                    case 'xoabl':
+                      if(isset($_GET['id']) && ($_GET['id']>0)){
+                          delete_binhluan($_GET['id']);
+                      }
+                      $list_binhluan =loadall_binhluan(0);
+                        include "binhluan/list.php";
+                        break;        
+
+                  case'logout':
+                   session_unset();
+                    header('Location: login.php');
+                    exit;
       default:
-      include "home.php";
+      // include "home.php";
       break;     
     }
   }
