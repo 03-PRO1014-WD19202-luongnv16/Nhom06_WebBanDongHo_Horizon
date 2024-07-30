@@ -63,9 +63,8 @@
  .login-container .links a:hover {
      text-decoration: underline;
  }
- /* QUen mk */
- .quen-mk input[type="submit"],
- .creat-account input[type="submit"] {
+ .update-mk,
+ .register {
      width: 100%;
      padding: 10px;
      background-color: #0866ff;

@@ -45,46 +45,38 @@
     <div class="main-content">
         <div class="title">
             <center>
-                <h2>DANH SÁCH TÀI KHOẢN</h2>
+                <h2>DANH SÁCH BÌNH LUẬN</h2>
             </center>
         </div>
         <div class="container">
             <table>
                 <tr>
-                    <th>MÃ TÀI KHOẢN</th>
-                    <th>TÊN ĐĂNG NHẬP</th>
-                    <th>HỌ VÀ TÊN</th>
-                    <th>MẬT KHẨU</th>
-                    <th>EMAIL</th>
-                    <th>ĐỊA CHỈ</th>
-                    <th>SỐ ĐIỆN THOẠI</th>
-                    <th>VAI TRÒ</th>
-                    <th>ẢNH</th>
+                    <th>ID</th>
+                    <th>USER</th>
+                    <th>HỌ TÊN </th>
+                    <th>NGÀY BÌNH LUẬN</th>
+                    <th>NỘI DUNG</th>
+
                     <th>HÀNH ĐỘNG</th>
-                    <th></th>
                 </tr>
 
                 <?php   
-                foreach ($listtaikhoan as $tk) {  
-                    extract($tk);  
-                    $themmoitk = "index.php?act=addtk";
-                    $suatk = "index.php?act=suatk&id=" . $id;  
-                    $xoatk = "index.php?act=xoatk&id=" . $id;  
-                    $hinhpath = "../img/" . $hinh;  
-                    $hinh = (is_file($hinhpath)) ? "<img src='" . $hinhpath . "' height='80' width='80'>" : "<img src='../img/default.jpg' height='80' width='80'>";  
+                foreach ($list_binhluan as $bl) {  
+                    extract($bl);  
+                     
+                    $xoabl = "index.php?act=xoabl&id=" . $id;  
+                   
+                  
                     echo '<tr>  
                         <td><center>' . $id . '</center></td>  
                         <td><center>' . $user . '</center></td>  
                         <td><center>' . $fullname . '</center></td>  
-                        <td><center>' . $pass . '</center></td>  
-                        <td><center>' . $email . '</center></td>  
-                        <td><center>' . $diachi . '</center></td>  
-                        <td><center>' . $tel . '</center></td>  
-                        <td><center>' . $role . '</center></td>  
-                        <td><center>' . $hinh . '</center></td>  
+                        <td><center>' . $ngaybinhluan . '</center></td>  
+                        <td><center>' . $noidung . '</center></td>  
+                       
                         <td>  
-                            <a href="' . $suatk . '"><input type="button" class="button" value="Sửa"></a>  
-                            <a href="#" onclick="confirmDelete(\'' . $xoatk . '\')"><input type="button" class="button" value="Xoá"></a>  
+                          
+                            <a href="#" onclick="confirmDelete(\'' . $xoabl . '\')"><input type="button" class="button" value="Xoá"></a>  
                         </td>  
                     </tr>';  
                 }  
@@ -92,7 +84,7 @@
 
             </table>
             <div style="margin-top: 10px;">
-                <a href="<?= $themmoitk ?>"><input type="button" class="button" value="Thêm mới tài khoản"></a>
+
             </div>
         </div>
     </div>

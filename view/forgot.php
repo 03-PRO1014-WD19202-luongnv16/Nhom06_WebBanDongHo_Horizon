@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">   
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quên mk</title>
     <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
     <div class="login-container">
         <div class="tieude-login">
@@ -16,11 +17,12 @@
                 <input type="text" placeholder="Email" required name="email">
                 <!-- <input type="password" placeholder="Mật khẩu" required> -->
                 <input type="submit" value="Gửi" name="guiemail">
-            </form>
-            <?php
-                if (isset($thongbao) && ($thongbao != "")) echo $thongbao;
-                header("location: view/login.php");
+                <?php
+                if(isset($thongbao) && ($thongbao != "")) echo $thongbao;
                 ?>
+            </form>
+
+
         </div>
 
         <div class=" links">

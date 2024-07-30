@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Đăng Nhập</title>
     <link rel="stylesheet" href="login.css">
+    <style>
+
+
+
+    </style>
 </head>
 
 <body>
@@ -14,10 +20,14 @@
         </div>
         <div class="form-login creat-account quen-mk">
             <form action="index.php?act=dangky" method="post">
+                <input type="text" placeholder="Fullname" required name="fullname">
                 <input type="email" placeholder="Email" required name="email">
                 <input type="text" placeholder="Tên đăng nhập" required name="user">
                 <input type="password" placeholder="Mật khẩu" required name="pass">
-                <input type="submit" value="Đăng ký" name="dangky">
+                <input type="submit" class="register" value="Đăng ký" name="dangky">
+                <?php
+                if(isset($thongbao) && ($thongbao != "")) echo $thongbao;
+                ?>
             </form>
         </div>
 
@@ -28,4 +38,4 @@
     </div>
 </body>
 
-</html>
+<!-- </html> -->
