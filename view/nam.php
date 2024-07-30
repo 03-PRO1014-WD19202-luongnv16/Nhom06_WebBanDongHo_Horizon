@@ -11,10 +11,10 @@
 <body>
 <main>
     <?php
-    $spnew = loadall_sanpham_new();  
+    $sp_nam = loadall_sanpham_id_nam();  
     $count=0;
-    echo '<center><h1 class="title hidden">Lựa Chọn Hoàn Hảo Cho Mọi Dịp</h1></center><tr></tr><div class="row ">';
-    foreach ($spnew as $sp) {
+    echo '<center><h1 class="title hidden">Đồng Hồ Nam Sang Trọng </h1></center><tr></tr><div class="row ">';
+    foreach ($sp_nam as $sp) {
         echo '<div class="product-box hidden">';
         echo '<a href="index.php?act=xemChiTiet&id_sp=' . $sp['id_sp'] . '">';
         echo '<img src="img/' . $sp['anhsp'] . '" alt="" class="product-img">';
