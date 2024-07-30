@@ -53,52 +53,44 @@ function update_sanpham($id_sp,$tensp, $anhsp, $giasp,$soluong, $mota, $id_dm, $
 }  
  ///bộ lọc
 function loadall_sanpham_new(){  
-    $sql= "SELECT * FROM sanpham ORDER BY date DESC LIMIT 10";  
+    $sql= "SELECT * FROM sanpham ORDER BY date DESC";  
     $listsp=pdo_query($sql);  
     return $listsp;  
 }   
 
 function loadall_sanpham_view(){  
-    $sql= "SELECT * FROM sanpham ORDER BY luotxem DESC LIMIT 10";  
+    $sql= "SELECT * FROM sanpham ORDER BY luotxem DESC LIMIT 4";  
     $listsp=pdo_query($sql);  
     return $listsp;  
 }  
-function addToCart($id_sp) {
-    $conn = pdo_get_connection();
-    
-    $sql = "SELECT id_cart, quantity FROM cart WHERE id_sp = :id_sp";
-    $addToCart = $conn->prepare($sql);
-    $addToCart->bindParam(':id_sp', $id_sp);
-    $addToCart->execute();
-    $cartItem = $addToCart->fetch(PDO::FETCH_ASSOC);
-
-    if ($cartItem) {
-        $id_cart = $cartItem['id_cart'];
-        $newQuantity = $cartItem['quantity'] + 1;
-
-        $sql = "UPDATE cart SET quantity = :newQuantity WHERE id_cart = :id_cart";
-        $addToCart = $conn->prepare($sql);
-        $addToCart->bindParam(':newQuantity', $newQuantity);
-        $addToCart->bindParam(':id_cart', $id_cart);
-        $addToCart->execute();
-    } else {
-        $sql = "INSERT INTO cart (id_sp, quantity) VALUES (:id_sp, 1)";
-        $addToCart = $conn->prepare($sql);
-        $addToCart->bindParam(':id_sp', $id_sp);
-        $addToCart->execute();
-    }
-    unset($conn); 
-}
-
-function loadall_cart(){
-    $sql="select * from cart ";
-    $listcart=pdo_query($sql);
-    return $listcart;
-}
+function loadall_sanpham_id_nam(){  
+    $sql= "SELECT * FROM sanpham where id_dm= 1";  
+    $listsp=pdo_query($sql);  
+    return $listsp;  
+}  
+function loadall_sanpham_id_nu(){  
+    $sql= "SELECT * FROM sanpham where id_dm= 2";  
+    $listsp=pdo_query($sql);  
+    return $listsp;  
+}  
+function loadall_sanpham_id_Rolex(){  
+    $sql= "SELECT * FROM sanpham where id_dm= 3";  
+    $listsp=pdo_query($sql);  
+    return $listsp;  
+}  
+function loadall_sanpham_id_Omega (){  
+    $sql= "SELECT * FROM sanpham where id_dm= 4";  
+    $listsp=pdo_query($sql);  
+    return $listsp;  
+}  
+function loadall_sanpham_id_Tag_Heuer(){  
+    $sql= "SELECT * FROM sanpham where id_dm= 5";  
+    $listsp=pdo_query($sql);  
+    return $listsp;  
+}  
 function update_view_count($id_sp) {  
     $sql = "UPDATE sanpham SET luotxem = luotxem + 1 WHERE id_sp = :id_sp";  
     pdo_execute($sql, [':id_sp' => $id_sp]);  
 }
-
 
 ?>

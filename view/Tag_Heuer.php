@@ -11,10 +11,10 @@
 <body>
 <main>
     <?php
-    $spnew = loadall_sanpham_new();  
+    $sp_Tag_Heuer = loadall_sanpham_id_Tag_Heuer();  
     $count=0;
-    echo '<center><h1 class="title hidden">Lựa Chọn Hoàn Hảo Cho Mọi Dịp</h1></center><tr></tr><div class="row ">';
-    foreach ($spnew as $sp) {
+    echo '<center><h1 class="title hidden">Đồng hồ Tag Heuer - Đẳng Cấp và Thời Trang</h1></center><tr></tr><div class="row ">';
+    foreach ($sp_Tag_Heuer as $sp) {
         echo '<div class="product-box hidden">';
         echo '<a href="index.php?act=xemChiTiet&id_sp=' . $sp['id_sp'] . '">';
         echo '<img src="img/' . $sp['anhsp'] . '" alt="" class="product-img">';

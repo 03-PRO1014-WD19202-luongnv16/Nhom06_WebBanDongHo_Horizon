@@ -1,45 +1,74 @@
-<div class="row">
-    <div class="row form-title">
-        <h1>THÊM MỚI SẢN PHẨM</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700&display=swap');
+    </style> 
+</head>
+<body>
+  <div class="main-content">
+    <div class="title">THÊM MỚI SẢN PHẨM</div>
+    <div class="container">
+      <form class="input-form" action="index.php?act=addsp" method="post" enctype="multipart/form-data">
+        <div class="input-data-text">
+          <div class="input">
+            Tên sản phẩm <br />
+            <input class="input-data" type="text" name="tensp" id="" />
+          </div>
+          <div class="input">
+            Giá<br />
+            <input class="input-data" type="text" name="giasp" id="" />
+          </div>
+          <div class="input">
+            Số Lượng<br />
+            <input class="input-data" type="number" name="soluong" id="" />
+          </div>
+          <div class="input">
+            Mô tả<br />
+            <textarea class="input-data" name="mota" id="" cols="30" rows="10"></textarea>
+          </div>
+          <div class="input">
+            Lượt xem<br />
+            <input class="input-data" type="number" name="luotxem" id="" />
+          </div>
+        </div>
+        <div class="input-data-file">
+          <div class="input">
+            Danh mục <br />
+            <select class="input-data select-data" name="id_dm" id="">
+              <?php 
+                foreach($listdanhmuc as $danhmuc){
+                  extract($danhmuc);
+                  echo '<option value="'.$id.'">'.$name.'</option>';
+                }
+              ?>
+            </select>
+          </div>   
+          <div class="input">
+            Hình<br />
+            <input class="input-data" type="file" name="anhsp" id="" />
+          </div> 
+          <div class="input">
+            Ngày<br />
+            <input class="input-data" type="date" name="date" id="" />
+          </div>      
+        </div>
+        <div class="input-button">
+          <input type="submit" class="button" name="themmoi" value="THÊM MỚI" />
+          <input type="reset" class="button" value="NHẬP LẠI" name="nhaplai" />
+          <a href="index.php?act=listsp">
+            <input type="button" class="button" name="btn_list" value="DANH SÁCH" />
+          </a>
+        </div>
+        <?php
+        if (isset($thongbao) && ($thongbao != "")) echo $thongbao;
+        ?>
+      </form>
     </div>
-    <div class="row form-content">
-        <form action="index.php?act=addsp" method="post" enctype="multipart/form-data">
-            <div class="row mb10">
-                Danh mục <br />
-                <select name="id_dm" id="">
-                    <?php 
-                  foreach($listdanhmuc as $danhmuc){
-                    extract($danhmuc);
-                    echo '<option value="'.$id.'">'.$name.'</option>';
-                  }
-                ?>
-                </select>
-            </div>
-            <div class="row mb10">
-                Tên sản phẩm <br />
-                <input type="text" name="tensp" id="" />
-            </div>
-            <div class="row mb10">
-                Giá<br />
-                <input type="text" name="giasp" id="" />
-            </div>
-            <div class="row mb10">
-                Hình<br />
-                <input type="file" name="anhsp" id="" />
-            </div>
-            <div class="row mb10">
-                Mô tả<br />
-                <textarea name="mota" id="" cols="30" rows="10"></textarea>
-            </div>
-            <div class="row mb10">
-                <input type="submit" name="themmoi" value="THÊM MỚI" />
-                <input type="reset" value="NHẬP LẠI" name="nhaplai" />
-                <a href="index.php?act=listsp"><input type="button" name="btn_list" value="DANH SÁCH" /></a>
-            </div>
-            <?php
-            if(isset($thongbao)&&($thongbao!="")) echo $thongbao;
-            ?>
-        </form>
-    </div>
-</div>
-</div>
+  </div>
+</body>
+
+</html>
