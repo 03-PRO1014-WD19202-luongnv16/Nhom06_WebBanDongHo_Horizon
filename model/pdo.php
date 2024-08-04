@@ -3,7 +3,7 @@
  * Mở kết nối đến CSDL sử dụng PDO
  */
 function pdo_get_connection(){
-    $dburl = "mysql:host=localhost;dbname=duan1624;charset=utf8";
+    $dburl = "mysql:host=localhost;dbname=duan1625;charset=utf8";
     $username = 'root';
     $password = '';
 

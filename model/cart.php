@@ -107,7 +107,7 @@ function sidecart($del) {
         echo '<h3>Tổng số tiền là: </h3>';
         echo '<p class="total-price">' . $tong . ' VNĐ</p>';
         echo '</div>';
-        echo '<a href="index.php?act=bill"><div class="button bottom-button">Mua</div></a>';
+        echo '<a href="index.php?act=bill"><div class="button buy-button ">Mua</div></a>';
     } else {
         echo '<p>Giỏ hàng của bạn đang trống.</p>';
     }
@@ -186,25 +186,41 @@ function loadall_bill($id_user=0){
     $listbill=pdo_query($sql);
     return $listbill;
 }
+
 function get_ttdh($n){
     switch($n){
         case 1:
-            $tt= "Đang xử lý";
-            break;
-        case 2:
-            $tt= "Đang giao";
-            break;
+          $tt= "Đã xác nhận";
+          break;
+          case 2:
+        $tt= "Đang giao hàng";
+        break;
         case 3:
-            $tt= "Đã giao";
-            break;
+          $tt= "Giao hàng thành công";
+          break;
+        case 4:
+          $tt= "Giao hàng thất bại";
+          break;
+        case 5:
+           $tt= "Huỷ";
+          break;
         case 0:
-            $tt= "Đơn Hàng Mới";
-            break;
-        default:
-            $tt= "Đơn Hàng Mới";
-            break;   
+          $tt= "Chờ xác nhận";
+          break;
     }
     return $tt;
+};
+
+function get_pttt($n){
+  switch($n){
+      case 1:
+          $get_pttt= "Thanh toán khi nhận hàng";
+          break;
+      case 2:
+          $get_pttt= "Thanh toán online";
+          break;
+  }
+  return $get_pttt;
 };
 function loadall_cart_coubt($id){
     $sql="select * from cart where bill_id=".$id;
@@ -217,10 +233,8 @@ function update_bill($id,$ttdh){
     pdo_execute($sql);
 }
 function delete_bill($bill_id) {
-    $sql = "DELETE FROM cart WHERE bill_id = $bill_id";
-    pdo_execute($sql);
 
-    $sql = "DELETE FROM bill WHERE bill_id = $bill_id";
+    $sql = "UPDATE bill SET trangthai = 5 WHERE bill_id =" .$bill_id;
     pdo_execute($sql);
 }
 

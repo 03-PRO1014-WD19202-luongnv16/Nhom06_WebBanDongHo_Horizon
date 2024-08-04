@@ -1,6 +1,6 @@
 <?php
   function loadAll_donhang(){
-    $sql = "SELECT * FROM bill ORDER BY bill_id DESC";
+    $sql = "SELECT * FROM bill ORDER BY trangthai ASC";
     $listdonhang = pdo_query($sql);
     return $listdonhang;
   }
@@ -14,27 +14,30 @@
     pdo_execute($sql);
   }
   function load_all_cart_items($bill_id){  
-    $sql=" SELECT tensp,anhsp,quantity,giasp FROM cart WHERE bill_id=".$bill_id;
+    $sql=" SELECT tensp,anhsp,soluong,giasp FROM cart WHERE bill_id=".$bill_id;
     $bill_items=pdo_query($sql);  
     return $bill_items;  
 }  
 function get_ttdh($n){
     switch($n){
         case 1:
-            $tt= "Đang xử lý";
-            break;
-        case 2:
-            $tt= "Đang giao";
-            break;
+          $tt= "Đã xác nhận";
+          break;
+          case 2:
+        $tt= "Đang giao hàng";
+        break;
         case 3:
-            $tt= "Đã giao";
-            break;
+          $tt= "Giao hàng thành công";
+          break;
+        case 4:
+          $tt= "Giao hàng thất bại";
+          break;
+        case 5:
+           $tt= "Huỷ";
+          break;
         case 0:
-            $tt= "Đơn Hàng Mới";
-            break;
-        default:
-            $tt= "Đơn Hàng Mới";
-            break;   
+          $tt= "Chờ xác nhận";
+          break;
     }
     return $tt;
 };
