@@ -19,33 +19,38 @@
             <input class="input-data" type="text" name="tensp" id="" />
           </div>
           <div class="input">
-            Giá<br />
+          Giá nhập<br />
+            <input class="input-data" type="text" name="gia_nhap" id="" />
+          </div>
+          <div class="input">
+          Giá gốc<br />
+            <input class="input-data" type="text" name="gia_chua_giam" id="" />
+          </div>
+          <div class="input">
+            Giá Bán<br />
             <input class="input-data" type="text" name="giasp" id="" />
           </div>
           <div class="input">
             Số Lượng<br />
             <input class="input-data" type="number" name="soluong" id="" />
           </div>
-          <div class="input">
-            Mô tả<br />
-            <textarea class="input-data" name="mota" id="" cols="30" rows="10"></textarea>
-          </div>
-          <div class="input">
-            Lượt xem<br />
-            <input class="input-data" type="number" name="luotxem" id="" />
-          </div>
+
+          
         </div>
         <div class="input-data-file">
           <div class="input">
             Danh mục <br />
             <select class="input-data select-data" name="id_dm" id="">
-              <?php 
-                foreach($listdanhmuc as $danhmuc){
-                  extract($danhmuc);
-                  echo '<option value="'.$id.'">'.$name.'</option>';
-                }
-              ?>
+             <option value="1" name="id_dm">nam</option>
+             <option value="2" name="id_dm">nữ</option>
+             <option value="3" name="id_dm">Rolex</option>
+             <option value="4" name="id_dm">Omega</option>
+             <option value="5" name="id_dm">Tag Heuer</option>
             </select>
+          </div>
+          <div class="input">
+            Mô tả<br />
+            <textarea class="input-data" name="mota" id="" cols="30" rows="5"></textarea>
           </div>   
           <div class="input">
             Hình<br />
@@ -54,7 +59,8 @@
           <div class="input">
             Ngày<br />
             <input class="input-data" type="date" name="date" id="" />
-          </div>      
+          </div>
+               
         </div>
         <div class="input-button">
           <input type="submit" class="button" name="themmoi" value="THÊM MỚI" />
@@ -68,6 +74,10 @@
         ?>
       </form>
     </div>
+  </div>
+</body>
+
+</html>
   </div>
 </body>
 

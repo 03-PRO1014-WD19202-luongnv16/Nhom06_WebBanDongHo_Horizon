@@ -9,7 +9,6 @@ if(is_file($hinhpath)){
 }else{
   $hinh="no photo";
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,16 +34,20 @@ if(is_file($hinhpath)){
                         <input class="input-data" type="text" name="tensp" value="<?=$tensp?>" />
                     </div>
                     <div class="input">
-                        Giá<br />
+                    Giá nhập<br />
+                        <input class="input-data" type="text" name="gia_nhap" value="<?=$gia_nhap?>" />
+                    </div>
+                    <div class="input">
+                    Giá gốc<br />
+                        <input class="input-data" type="text" name="gia_chua_giam" value="<?=$gia_chua_giam?>" />
+                    </div>
+                    <div class="input">
+                        Giá bán<br />
                         <input class="input-data" type="text" name="giasp" value="<?=$giasp?>" />
                     </div>
                     <div class="input">
                         Số Lượng<br />
                         <input class="input-data" type="number" name="soluong" value="<?=$soluong?>" />
-                    </div>
-                    <div class="input">
-                        Mô tả<br />
-                        <textarea class="input-data" name="mota" cols="30" rows="10"><?=$mota?></textarea>
                     </div>
                     <div class="input">
                         <input type="hidden" name="id_sp" value="<?=$id_sp?>" />
@@ -54,14 +57,16 @@ if(is_file($hinhpath)){
                     <div class="input">
                         Danh mục <br />
                         <select class="input-data select-data" name="id_dm" id="">
-                            <?php 
-                foreach($listdanhmuc as $danhmuc){
-                  extract($danhmuc);
-                  $selected = ($id_dm == $danhmuc['id_dm']) ? 'selected' : '';
-                  echo '<option value="'.$id.'">'.$name.'</option>';
-                }
-              ?>
+                            <option value="1" <?php if($id_dm == 1) echo 'selected'; ?>>nam</option>
+                            <option value="2" <?php if($id_dm == 2) echo 'selected'; ?>>nữ</option>
+                            <option value="3" <?php if($id_dm == 3) echo 'selected'; ?>>Rolex</option>
+                            <option value="4" <?php if($id_dm == 4) echo 'selected'; ?>>Omega</option>
+                            <option value="5" <?php if($id_dm == 5) echo 'selected'; ?>>Tag Heuer</option>
                         </select>
+                    </div>
+                    <div class="input">
+                        Mô tả<br />
+                        <textarea class="input-data" name="mota" cols="30" rows="5"><?=$mota?></textarea>
                     </div>
                     <div class="input">
                         Hình<br />
@@ -71,10 +76,6 @@ if(is_file($hinhpath)){
                     <div class="input">
                         Ngày<br />
                         <input class="input-data" type="date" name="date" value="<?=$date?>" />
-                    </div>
-                    <div class="input">
-                        Lượt xem<br />
-                        <input class="input-data" type="number" name="luotxem" value="<?=$luotxem?>" />
                     </div>
                 </div>
                 <div class="input-button">
