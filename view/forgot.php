@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quên mk</title>
     <link rel="stylesheet" href="login.css">
+    <style>
+ .account-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0866ff!important;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+    </style>
 </head>
 
 <body>
@@ -16,7 +28,7 @@
             <form action="index.php?act=quenmk" method="post">
                 <input type="text" placeholder="Email" required name="email">
                 <!-- <input type="password" placeholder="Mật khẩu" required> -->
-                <input type="submit" value="Gửi" name="guiemail">
+                <input type="submit" class="account-button" value="Gửi" name="guiemail">
                 <?php
                 if(isset($thongbao) && ($thongbao != "")) echo $thongbao;
                 ?>

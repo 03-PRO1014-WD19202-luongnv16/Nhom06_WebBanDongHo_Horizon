@@ -44,17 +44,20 @@ $list_cmt = loadall_binhluan($idpro);
         <?php if (isset($_SESSION['user'])): ?>
         <div class="comment-box">
             <?php
-                $hinh = $_SESSION['user']['hinh'];
-                
-                
-                $hinhpath = "./img/".$hinh;
-                if(is_file($hinhpath)){
-                 $hinh = "<img src='".$hinhpath."' >";
-                }else{
-                 $hinh = "img/default.jpg";
-                }
-            ?>
-            <img src="<?= $hinh ?>" alt="User Avatar">
+               
+              
+               extract($_SESSION['user']);
+               $hinhpath = "img/".$hinh;
+               if(!is_file($hinhpath)){
+                $hinh = "<img src='".$hinhpath."'>";
+               }else{
+                $hinh = "<img src='img/default.jpg' >";
+               }
+               
+           
+           ?>
+
+            <?= $hinh ?>
 
             <form name="commentForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"
                 enctype="multipart/form-data" onsubmit="return validateComment()">

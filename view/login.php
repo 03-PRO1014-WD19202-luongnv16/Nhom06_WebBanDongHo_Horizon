@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Đăng Nhập</title>
     <link rel="stylesheet" href="login.css">
+    <style>
+         .account-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0866ff!important;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+    </style>
 </head>
 
 <body>
@@ -17,7 +29,7 @@
             <form action="index.php?act=dangnhap" method="post">
                 <input type="text" placeholder="Tên đăng nhập" required name="user">
                 <input type="password" placeholder="Mật khẩu" required name="pass">
-                <input type="submit" value="Đăng nhập" name="dangnhap">
+                <input type="submit" class="account-button" value="Đăng nhập" name="dangnhap">
                 <?php
                 if(isset($thongbao) && ($thongbao != "")) echo $thongbao;
                 ?>

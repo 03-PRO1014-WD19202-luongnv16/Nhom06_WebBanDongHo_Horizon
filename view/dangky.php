@@ -7,10 +7,18 @@
     <title>Trang Đăng Nhập</title>
     <link rel="stylesheet" href="login.css">
     <style>
-
-
-
+         .account-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0866ff!important;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
     </style>
+
 </head>
 
 <body>
@@ -24,7 +32,7 @@
                 <input type="email" placeholder="Email" required name="email">
                 <input type="text" placeholder="Tên đăng nhập" required name="user">
                 <input type="password" placeholder="Mật khẩu" required name="pass">
-                <input type="submit" class="register" value="Đăng ký" name="dangky">
+                <input type="submit" class="account-button" value="Đăng ký" name="dangky">
                 <?php
                 if(isset($thongbao) && ($thongbao != "")) echo $thongbao;
                 ?>
