@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 
+
 <body>
     <div class="mybill-container">
+        <center>
         <center>
             <table class="bill-table">
                 <h1 class="title">Đơn Hàng Của Bạn</h1>
@@ -49,8 +52,12 @@
                         }
                     }
                 }
+                        }
+                    }
+                }
                 ?>
             </table>
+        </center>
         </center>
     </div>
     <script>
@@ -75,5 +82,6 @@
     });
 </script>
 </body>
+
 
 </html>
