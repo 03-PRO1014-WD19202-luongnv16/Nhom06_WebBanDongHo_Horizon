@@ -7,6 +7,10 @@ include '../model/pdo.php';
   include "../model/sanpham.php";
   include "../model/donhang.php";
   include "../model/binhluan.php";
+  include "../model/voucher.php";
+  include "../model/thongke.php";
+  
+  
   include "sidebar.php";
   if(!isset($_SESSION['s_user'])){
     header('location: ../admin/login.php');
@@ -54,10 +58,11 @@ include '../model/pdo.php';
         if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
           $id_dm=$_POST['id_dm'];
           $tensp=$_POST['tensp'];
+          $gia_nhap=$_POST['gia_nhap'];
+          $gia_chua_giam=$_POST['gia_chua_giam'];
           $giasp=$_POST['giasp'];
           $soluong=$_POST['soluong'];
           $mota=$_POST['mota'];
-          $luotxem=$_POST['luotxem'];
           $date=$_POST['date'];
           $target_dir = "../img/";
           $anhsp=$_FILES['anhsp']['name'];
@@ -66,7 +71,7 @@ include '../model/pdo.php';
           }else{
              echo 'Lỗi';
           }
-          insert_sanpham($tensp,$giasp,$anhsp,$soluong,$mota,$id_dm,$luotxem,$date);
+          insert_sanpham($tensp,$gia_nhap,$gia_chua_giam,$giasp,$anhsp,$soluong,$mota,$id_dm,$date);
           $thongbao="Thêm thành công";
         }
         $listdanhmuc=loadAll_danhmuc();
@@ -104,10 +109,11 @@ include '../model/pdo.php';
             $id_sp=$_POST['id_sp'];
             $id_dm=$_POST['id_dm'];
             $tensp=$_POST['tensp'];
+            $gia_nhap=$_POST['gia_nhap'];
+          $gia_chua_giam=$_POST['gia_chua_giam'];
             $giasp=$_POST['giasp'];
             $soluong=$_POST['soluong'];
             $mota=$_POST['mota'];
-            $luotxem=$_POST['luotxem'];
             $date=$_POST['date'];
             $hinh=$_FILES['hinh']['name'];
             $target_dir = "../img/";
@@ -117,7 +123,7 @@ include '../model/pdo.php';
             }else{
               
             }
-            update_sanpham($id_sp,$tensp, $hinh, $giasp,$soluong, $mota, $id_dm, $luotxem,$date);
+            update_sanpham($id_sp,$tensp, $hinh, $gia_nhap,$gia_chua_giam,$giasp,$soluong, $mota, $id_dm,$date);
           }
           $listdanhmuc=loadAll_danhmuc();
           $listsanpham=loadAll_sanpham("",0);
@@ -143,7 +149,11 @@ include '../model/pdo.php';
           }
           $listdonhang=loadAll_donhang();
           include './donhang/list.php';
-          break;    
+          break;
+        
+        
+        
+        
           case 'dskh':
             $listtaikhoan =loadall_taikhoan();
             include "taikhoan/list.php"; 
@@ -212,7 +222,13 @@ include '../model/pdo.php';
                       }
                       $list_binhluan =loadall_binhluan(0);
                         include "binhluan/list.php";
-                        break;        
+                        break;   
+                        
+                  case 'listthongke';
+                  $top_selling_products = get_top5_ban_chay();
+                  $don_hang_thong_ke = thong_ke_don_hang();
+                  include "thongke/list.php";
+                  break;
 
                   case'logout':
                    session_unset();
@@ -224,3 +240,24 @@ include '../model/pdo.php';
     }
   }
 ?>
+ <script>
+    function formatGia(number) {
+        let numStr = number.toString();
+        let parts = [];
+        for (let i = numStr.length - 1, count = 0; i >= 0; i--, count++) {
+            if (count > 0 && count % 3 === 0) {
+                parts.push('.');
+            }
+            parts.push(numStr[i]);
+        }
+        return parts.reverse().join('');
+    }
+
+    document.querySelectorAll('#giasp').forEach(element => {
+        let priceText = element.textContent.trim();
+        let number = parseInt(priceText.replace('VNĐ', '').replace(/\./g, '').trim(), 10);
+        if (!isNaN(number)) {
+            element.textContent = formatGia(number) + ' VNĐ';
+        }
+    });
+</script>

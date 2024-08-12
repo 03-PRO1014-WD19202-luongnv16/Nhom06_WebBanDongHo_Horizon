@@ -91,9 +91,10 @@
                 ?>
 
             </table>
-            <div style="margin-top: 10px;">
+            <center><div style="margin-top: 10px;">
                 <a href="<?= $themmoitk ?>"><input type="button" class="button" value="Thêm mới tài khoản"></a>
             </div>
+            </center>
         </div>
     </div>
 </body>

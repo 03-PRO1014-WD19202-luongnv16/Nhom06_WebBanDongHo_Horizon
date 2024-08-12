@@ -62,6 +62,27 @@
     <input type="submit" name="dongydathang" class="button confirm-button" value="Xác nhận mua">
     </form>
     <?php unset($conn); ?>
+    <script>
+    function formatGia(number) {
+        let numStr = number.toString();
+        let parts = [];
+        for (let i = numStr.length - 1, count = 0; i >= 0; i--, count++) {
+            if (count > 0 && count % 3 === 0) {
+                parts.push('.');
+            }
+            parts.push(numStr[i]);
+        }
+        return parts.reverse().join('');
+    }
+
+    document.querySelectorAll('#giasp').forEach(element => {
+        let priceText = element.textContent.trim();
+        let number = parseInt(priceText.replace('VNĐ', '').replace(/\./g, '').trim(), 10);
+        if (!isNaN(number)) {
+            element.textContent = formatGia(number) + ' VNĐ';
+        }
+    });
+</script>
 </body>
 
 </html>

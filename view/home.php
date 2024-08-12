@@ -29,7 +29,7 @@ foreach ($products as $sp) {
     echo '<input type="hidden" name="id_sp" value="' . $sp['id_sp'] . '">';
     echo '<input type="hidden" name="tensp" value="' . $sp['tensp'] . '">';
     echo '<input type="hidden" name="giasp" value="' . $sp['giasp'] . '">';
-    echo '<input type="hidden" name="anhsp" value="' . $sp['anhsp'] . '">';
+    echo '<input type="hidden"  id="giasp" name="anhsp" value="' . $sp['anhsp'] . '">';
     echo '<input type="submit" name="addtocart" class="button" value="Thêm Vào Giỏ Hàng">';
     echo '</form>';
     echo '</div>';
@@ -56,7 +56,7 @@ foreach ($sp_hot as $sp) {
     echo '<input type="hidden" name="id_sp" value="' . $sp['id_sp'] . '">';
     echo '<input type="hidden" name="tensp" value="' . $sp['tensp'] . '">';
     echo '<input type="hidden" name="giasp" value="' . $sp['giasp'] . '">';
-    echo '<input type="hidden" name="anhsp" value="' . $sp['anhsp'] . '">';
+    echo '<input type="hidden"  id="giasp" name="anhsp" value="' . $sp['anhsp'] . '">';
     echo '<input type="submit" name="addtocart" class="button" value="Thêm Vào Giỏ Hàng">';
     echo '</form>';
     echo '</div>';

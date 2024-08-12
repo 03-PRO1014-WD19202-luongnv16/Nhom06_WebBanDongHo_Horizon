@@ -17,14 +17,14 @@ function insert_taikhoan_admin($user,$pass,$email,$diachi,$tel,$role,$hinh)
 //     return $taikhoan;
 // }
 
-function check_user($user, $pass)
-{
-    
-    $sql = "SELECT * FROM taikhoan WHERE user = ? AND pass = ?";
-    // Gọi hàm pdo_query_one với các tham số
-    $taikhoan = pdo_query_one($sql, $user, $pass);
-    return $taikhoan;
-}
+    function check_user($user, $pass)
+    {
+        
+        $sql = "SELECT * FROM taikhoan WHERE user = ? AND pass = ?";
+        // Gọi hàm pdo_query_one với các tham số
+        $taikhoan = pdo_query_one($sql, $user, $pass);
+        return $taikhoan;
+    }
 
 // function update_taikhoan($id,  $pass, $email, $diachi, $tel,$hinh)
 // {

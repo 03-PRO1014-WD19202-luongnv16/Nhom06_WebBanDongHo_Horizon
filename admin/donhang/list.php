@@ -74,7 +74,7 @@
                         <center><?= get_pttt($pttt) ?></center>
                     </td>
 
-                    <td>
+                    <td id='giasp'>
                         <center><?= $tonggia?></center>
                     </td>
                     <td>

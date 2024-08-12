@@ -28,16 +28,16 @@ function viewcart($del){
                       <tr class=product-views>
                         <td><center><img src="'.$hinh.'" alt="" height="80px"></center></td>
                         <td><center>'.$cart[1].'</center></td>
-                        <td><center>'.$cart[3].'</center></td>
+                        <td id="giasp"><center>'.$cart[3].'</center></td>
                         <td><center>'.$cart[4].'</center></td>
-                        <td><center>'.$ttien.'</center></td>
+                        <td id="giasp" ><center>'.$ttien.'</center></td>
                       </tr>';
                     $i+=1;
                     }
                 echo '<tr>
                             <td colspan="4">Tổng đơn hàng</td>
                               
-                            <td>'.$tong.'</td>
+                            <td id="giasp">'.$tong.'</td>
                             <td></td>
                             '.$xoasp_td2.'
                      </tr>';
@@ -92,7 +92,7 @@ function sidecart($del) {
             echo '<span class="quantity">' . $cart[4] . '</span>';
             echo '<button type="submit" name="increase" class="add-decrease">+</button>';
             echo '</div>';
-            echo '<p class="cart-product-price">' . $cart[3] . ' VNĐ</p>';
+            echo '<p id="giasp"  class="cart-product-price">' . $cart[3] . ' VNĐ</p>';
 
             if ($del == 1) {
                 echo '<a href="index.php?act=delcart&idcart='.$i.'"><input class="add-decrease" type="button" value="X"></a>';
@@ -105,9 +105,9 @@ function sidecart($del) {
 
         echo '<div class="total-box">';
         echo '<h3>Tổng số tiền là: </h3>';
-        echo '<p class="total-price">' . $tong . ' VNĐ</p>';
+        echo '<p id="giasp"  class="total-price">' . $tong . ' VNĐ</p>';
         echo '</div>';
-        echo '<a href="index.php?act=bill"><div class="button bottom-button">Mua</div></a>';
+        echo '<a href="index.php?act=bill"><div class="button buy-button ">Mua</div></a>';
     } else {
         echo '<p>Giỏ hàng của bạn đang trống.</p>';
     }
@@ -135,9 +135,9 @@ function bill_chi_tiet($listbill){
                       <tr class=product-views>
                         <td><center><img src="'.$hinh.'" alt="" height="80px"></center></td>
                         <td><center>'.$cart['tensp'].'</center></td>
-                        <td><center>'.$cart['giasp'].'</center></td>
+                        <td id="giasp" ><center>'.$cart['giasp'].'</center></td>
                         <td><center>'.$cart['soluong'].'</center></td>
-                        <td><center>'.$cart['thanhtien'].'</center></td>
+                        <td id="giasp"><center>'.$cart['thanhtien'].'</center></td>
                         
                       </tr>';
                     $i+=1;
@@ -145,7 +145,7 @@ function bill_chi_tiet($listbill){
                 echo '<tr>
                             <td colspan="4">Tổng Giá</td>
                               
-                            <td>'.$tong.'</td>
+                            <td id="giasp" >'.$tong.'</td>
                             <td></td>
                      </tr>';
 }
@@ -186,25 +186,41 @@ function loadall_bill($id_user=0){
     $listbill=pdo_query($sql);
     return $listbill;
 }
+
 function get_ttdh($n){
     switch($n){
         case 1:
-            $tt= "Đang xử lý";
-            break;
-        case 2:
-            $tt= "Đang giao";
-            break;
+          $tt= "Đã xác nhận";
+          break;
+          case 2:
+        $tt= "Đang giao hàng";
+        break;
         case 3:
-            $tt= "Đã giao";
-            break;
+          $tt= "Giao hàng thành công";
+          break;
+        case 4:
+          $tt= "Giao hàng thất bại";
+          break;
+        case 5:
+           $tt= "Huỷ";
+          break;
         case 0:
-            $tt= "Đơn Hàng Mới";
-            break;
-        default:
-            $tt= "Đơn Hàng Mới";
-            break;   
+          $tt= "Chờ xác nhận";
+          break;
     }
     return $tt;
+};
+
+function get_pttt($n){
+  switch($n){
+      case 1:
+          $get_pttt= "Thanh toán khi nhận hàng";
+          break;
+      case 2:
+          $get_pttt= "Thanh toán online";
+          break;
+  }
+  return $get_pttt;
 };
 function loadall_cart_coubt($id){
     $sql="select * from cart where bill_id=".$id;
@@ -217,10 +233,8 @@ function update_bill($id,$ttdh){
     pdo_execute($sql);
 }
 function delete_bill($bill_id) {
-    $sql = "DELETE FROM cart WHERE bill_id = $bill_id";
-    pdo_execute($sql);
 
-    $sql = "DELETE FROM bill WHERE bill_id = $bill_id";
+    $sql = "UPDATE bill SET trangthai = 5 WHERE bill_id =" .$bill_id;
     pdo_execute($sql);
 }
 

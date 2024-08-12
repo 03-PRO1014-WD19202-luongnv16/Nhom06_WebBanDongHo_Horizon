@@ -63,14 +63,3 @@
  .login-container .links a:hover {
      text-decoration: underline;
  }
- .update-mk,
- .register {
-     width: 100%;
-     padding: 10px;
-     background-color: #0866ff;
-     color: white;
-     border: none;
-     border-radius: 4px;
-     cursor: pointer;
-     margin-top: 10px;
- }

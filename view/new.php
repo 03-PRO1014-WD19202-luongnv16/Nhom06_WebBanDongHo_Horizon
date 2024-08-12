@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700&display=swap');
-      </style>
+    @import url('https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700&display=swap');
+    </style>
 </head>
+
 <body>
-<main>
-    <?php
+    <main>
+        <?php
     $spnew = loadall_sanpham_new();  
     $count=0;
     echo '<center><h1 class="title hidden">Lựa Chọn Hoàn Hảo Cho Mọi Dịp</h1></center><tr></tr><div class="row ">';
@@ -25,7 +27,7 @@
         echo '<form action="index.php?act=addtocart" method="POST">';
         echo '<input type="hidden" name="id_sp" value="' . $sp['id_sp'] . '">';
         echo '<input type="hidden" name="tensp" value="' . $sp['tensp'] . '">';
-        echo '<input type="hidden" name="giasp" value="' . $sp['giasp'] . '">';
+        echo '<input type="hidden"  id="giasp" name="giasp" value="' . $sp['giasp'] . '">';
         echo '<input type="hidden" name="anhsp" value="' . $sp['anhsp'] . '">';
         echo '<input type="submit" name="addtocart" class="button" value="Thêm Vào Giỏ Hàng">';
         echo '</form>';
@@ -37,6 +39,7 @@
     }
     echo '</div>';
     ?>
-</main>
+    </main>
 </body>
+
 </html>
